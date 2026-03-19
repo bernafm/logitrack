@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LOGITRACK – Detalle Proyecto</title>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue: #1F4085;
+  --red: #EF4F3E;
+  --white: #FFFFFF;
+  --gray-50: #F8FAFC;
+  --gray-100: #F1F5F9;
+  --gray-200: #E2E8F0;
+  --gray-400: #94A3B8;
+  --gray-500: #64748B;
+  --gray-700: #334155;
+  --green-bg: #ECFDF5;
+  --green: #34D399;
+  --red-bg: #FEE2E2;
+  --red-light: #FB7185;
+  --yellow-bg: #FFFBEC;
+  --yellow: #E5BA2D;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Open Sans', sans-serif;
+  background: var(--blue);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ── NAVBAR ─────────────────────────────────── */
+.navbar {
+  height: 72px;
+  background: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  flex-shrink: 0;
+}
+.navbar-logo { display: flex; align-items: center; }
+.navbar-actions { display: flex; align-items: center; gap: 8px; }
+.nav-icon-btn {
+  width: 42px; height: 42px; border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: transparent; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; color: white;
+}
+.nav-avatar {
+  width: 42px; height: 42px; border-radius: 100px;
+  background: white; display: flex; align-items: center; justify-content: center;
+}
+
+/* ── LAYOUT ──────────────────────────────────── */
+.layout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  padding: 24px 24px 24px 0;
+  gap: 24px;
+}
+
+/* ── SIDEBAR ─────────────────────────────────── */
+.sidebar {
+  width: 264px;
+  min-width: 264px;
+  background: var(--blue);
+  border-radius: 16px;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  overflow-y: auto;
+}
+.sidebar-logo { padding: 8px 4px 4px; }
+.sidebar-section { display: flex; flex-direction: column; gap: 6px; }
+.sidebar-section-label {
+  font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.45);
+  padding: 4px 16px; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.sidebar-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 16px; border-radius: 8px;
+  color: white; font-size: 14px; font-weight: 600;
+  cursor: pointer; min-height: 41px; text-decoration: none;
+}
+.sidebar-item--active { background: white; color: var(--blue); }
+.sidebar-item svg { flex-shrink: 0; }
+
+/* ── MAIN CONTENT ────────────────────────────── */
+.main {
+  flex: 1;
+  background: white;
+  border-radius: 16px;
+  padding: 28px 32px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+/* ── PROJECT HEADER ──────────────────────────── */
+.project-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+.project-header__left { display: flex; align-items: flex-start; gap: 16px; }
+.back-btn {
+  width: 24px; height: 24px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; flex-shrink: 0; margin-top: 6px;
+}
+.project-img {
+  width: 100px; height: 100px;
+  background: #D9D9D9; border-radius: 12px;
+  flex-shrink: 0;
+}
+.project-info { display: flex; flex-direction: column; gap: 8px; padding-top: 2px; }
+.project-name { font-size: 24px; font-weight: 700; color: var(--blue); }
+.project-company { font-size: 16px; font-weight: 400; color: var(--blue); }
+.project-dates { display: flex; align-items: center; gap: 24px; }
+.project-date { display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--gray-500); }
+.project-header__right { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; flex-shrink: 0; }
+.project-actions { display: flex; gap: 12px; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 8px; border-radius: 8px; cursor: pointer;
+  font-family: inherit; font-weight: 400; white-space: nowrap;
+}
+.btn--xs { padding: 8px 12px; font-size: 14px; height: 37px; border: none; }
+.btn--lg { padding: 12px 12px; font-size: 18px; height: 51px; border: none; }
+.btn--secondary-blue { background: white; border: 1px solid var(--blue); color: var(--blue); }
+.btn--secondary-red { background: white; border: 1px solid var(--red-light); color: var(--red-light); }
+.btn--primary { background: var(--blue); color: white; }
+.ver-detalle { display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--blue); cursor: pointer; }
+
+/* ── STATS CARDS ─────────────────────────────── */
+.stats-row { display: flex; gap: 24px; }
+.card-stat {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; background: var(--gray-50); border-radius: 16px;
+  padding: 16px; flex: 1; height: 80px;
+}
+.card-stat__info { display: flex; align-items: center; gap: 12px; }
+.card-stat__title { font-size: 18px; color: var(--blue); }
+.card-stat__value { font-size: 32px; font-weight: 700; color: var(--blue); }
+
+/* ── CONTENT AREA ────────────────────────────── */
+.content-area { display: flex; flex-direction: column; gap: 24px; }
+
+/* ── TABS ────────────────────────────────────── */
+.tabs-row { display: flex; align-items: flex-end; }
+.tab {
+  display: flex; align-items: center; gap: 6px;
+  padding: 10px; height: 40px;
+  background: white; border: 1px solid var(--gray-200);
+  border-radius: 4px 4px 0 0; cursor: pointer;
+  font-size: 16px; white-space: nowrap;
+}
+.tab--active { color: var(--blue); font-weight: 700; }
+.tab--inactive { color: var(--gray-400); font-weight: 400; }
+.tab-x { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; }
+.tab-sep { width: 12px; }
+
+/* ── TOOLBAR ─────────────────────────────────── */
+.toolbar { display: flex; flex-direction: column; gap: 16px; }
+.toolbar-filters { display: flex; gap: 12px; align-items: flex-end; }
+.toolbar-row { display: flex; align-items: center; justify-content: space-between; }
+.results-count { font-size: 20px; font-weight: 700; color: var(--blue); }
+.input-group { display: flex; flex-direction: column; gap: 6px; }
+.input-label { font-size: 14px; color: var(--gray-700); }
+.input-field {
+  display: flex; align-items: center; gap: 8px;
+  background: white; border: 1px solid var(--gray-200);
+  border-radius: 8px; padding: 12px; height: 48px; width: 250px;
+}
+.input-field input {
+  border: none; outline: none; font-family: inherit;
+  font-size: 16px; color: var(--gray-700); flex: 1; background: transparent;
+}
+.input-field input::placeholder { color: var(--gray-400); }
+
+/* ── TABLE ───────────────────────────────────── */
+.table-wrap { border: 1px solid var(--gray-200); border-radius: 12px; overflow: hidden; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+thead th {
+  background: white; padding: 16px 22px;
+  text-align: left; font-weight: 600; color: var(--gray-700);
+  border-bottom: 1px solid var(--gray-200); white-space: nowrap;
+}
+tbody td {
+  padding: 16px 22px; color: var(--gray-700);
+  border-bottom: 1px solid var(--gray-200); white-space: nowrap;
+}
+tbody tr:nth-child(odd) td { background: var(--gray-50); }
+tbody tr:nth-child(even) td { background: white; }
+.badge {
+  display: inline-flex; align-items: center;
+  padding: 4px 12px; border-radius: 100px;
+  font-size: 14px; border: 1px solid;
+}
+.badge--positive { background: var(--green-bg); border-color: var(--green); color: var(--green); }
+.badge--negative { background: var(--red-bg); border-color: var(--red-light); color: var(--red-light); }
+.badge--process { background: var(--yellow-bg); border-color: var(--yellow); color: var(--yellow); }
+.badge--neutral { background: var(--gray-50); border-color: var(--blue); color: var(--blue); }
+
+/* ── TABLE FOOTER ────────────────────────────── */
+.table-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 16px; background: white;
+}
+.table-footer-left {
+  display: flex; align-items: center; gap: 16px;
+  font-size: 14px; color: var(--gray-500);
+}
+.table-footer-select {
+  border: 1px solid var(--gray-200); border-radius: 4px;
+  padding: 5px 8px; font-size: 14px; background: white; font-family: inherit;
+}
+.table-footer-arrows { display: flex; gap: 4px; }
+.table-footer-btn {
+  width: 44px; height: 44px; border: none; background: transparent;
+  border-radius: 4px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; color: var(--gray-500);
+}
+
+/* ── ACTION DROPDOWN ─────────────────────────── */
+.action-btn {
+  width: 32px; height: 32px; border: 1px solid var(--gray-200);
+  border-radius: 6px; background: white; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gray-500); position: relative;
+}
+.dropdown-menu {
+  position: absolute; right: 0; top: 36px;
+  background: white; border: 1px solid var(--gray-200);
+  border-radius: 12px; padding: 4px 0; width: 240px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12); z-index: 100;
+  display: none;
+}
+.action-wrap { position: relative; display: inline-block; }
+.action-wrap:hover .dropdown-menu { display: block; }
+.dropdown-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 16px; height: 44px; font-size: 14px;
+  color: var(--gray-700); cursor: pointer;
+}
+.dropdown-item:hover { background: var(--gray-50); }
+.dropdown-item--danger { color: var(--red-light); }
+.dropdown-item--danger svg { stroke: var(--red-light); }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="navbar-logo">
+    <svg width="120" height="26" viewBox="0 0 120 26">
+      <text x="0" y="20" font-family="Open Sans" font-weight="700" font-size="18" fill="white">LOGITRACK</text>
+    </svg>
+  </div>
+  <div class="navbar-actions">
+    <button class="nav-icon-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </button>
+    <button class="nav-icon-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93A10 10 0 1 0 4.93 19.07"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
+    </button>
+    <button class="nav-icon-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+    </button>
+    <div class="nav-avatar">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F4085" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </div>
+  </div>
+</nav>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <svg width="110" height="22" viewBox="0 0 110 22">
+        <text x="0" y="17" font-family="Open Sans" font-weight="700" font-size="15" fill="white">LOGITRACK</text>
+      </svg>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-section-label">Principal</div>
+      <a href="logitrack-dashboard.html" class="sidebar-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        <span>Dashboard</span>
+      </a>
+      <a href="logitrack-actividades.html" class="sidebar-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span>Personas</span>
+      </a>
+      <a class="sidebar-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        <span>Equipos</span>
+      </a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-section-label">Gestión</div>
+      <a class="sidebar-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg><span>Solicitud</span></a>
+      <a class="sidebar-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg><span>Logística de máquinas</span></a>
+      <a class="sidebar-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg><span>Autorizaciones</span></a>
+      <a class="sidebar-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93A10 10 0 1 0 4.93 19.07"/></svg><span>Implementación</span></a>
+      <a class="sidebar-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg><span>Carpetas</span></a>
+      <a class="sidebar-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg><span>Tickets</span></a>
+      <a class="sidebar-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg><span>Salida de obras</span></a>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-section-label">Configuración</div>
+      <a class="sidebar-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg><span>Maestros</span></a>
+      <a class="sidebar-item sidebar-item--active"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg><span>Proyectos</span></a>
+      <a class="sidebar-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg><span>Parámetros</span></a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- PROJECT HEADER -->
+    <div class="project-header">
+      <div class="project-header__left">
+        <a href="logitrack-dashboard.html" class="back-btn" title="Volver al Dashboard">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#EF4F3E" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+        </a>
+        <div class="project-img"></div>
+        <div class="project-info">
+          <div class="project-name">Nombre del Proyecto</div>
+          <div class="project-company">Nombre de la empresa</div>
+          <div class="project-dates">
+            <div class="project-date">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span>01/01/2025</span>
+            </div>
+            <div class="project-date">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span>31/12/2025</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="project-header__right">
+        <div class="project-actions">
+          <button class="btn btn--xs btn--secondary-blue">Contactar Encargado</button>
+          <button class="btn btn--xs btn--secondary-red">Finalizar Obra</button>
+        </div>
+        <div class="ver-detalle">
+          <span>Ver detalle</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1F4085" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATS CARDS -->
+    <div class="stats-row">
+      <div class="card-stat">
+        <div class="card-stat__info">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#EF4F3E" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span class="card-stat__title">Personas</span>
+        </div>
+        <span class="card-stat__value">20</span>
+      </div>
+      <div class="card-stat">
+        <div class="card-stat__info">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#EF4F3E" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          <span class="card-stat__title">Insumos</span>
+        </div>
+        <span class="card-stat__value">20</span>
+      </div>
+      <div class="card-stat">
+        <div class="card-stat__info">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#EF4F3E" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          <span class="card-stat__title">Equipos</span>
+        </div>
+        <span class="card-stat__value">20</span>
+      </div>
+      <div class="card-stat">
+        <div class="card-stat__info">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#EF4F3E" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          <span class="card-stat__title">Documentos</span>
+        </div>
+        <span class="card-stat__value">20</span>
+      </div>
+    </div>
+
+    <!-- CONTENT AREA -->
+    <div class="content-area">
+
+      <!-- TABS -->
+      <div class="tabs-row">
+        <div class="tab tab--active">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1F4085" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Personas
+          <div class="tab-x"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#D3D3D3" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+        </div>
+        <div class="tab-sep"></div>
+        <div class="tab tab--inactive">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          Insumos
+          <div class="tab-x"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#D3D3D3" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+        </div>
+        <div class="tab-sep"></div>
+        <div class="tab tab--inactive">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          Equipos
+          <div class="tab-x"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#D3D3D3" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+        </div>
+        <div class="tab-sep"></div>
+        <div class="tab tab--inactive">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+          Documentos
+          <div class="tab-x"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#D3D3D3" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+        </div>
+      </div>
+
+      <!-- TOOLBAR -->
+      <div class="toolbar">
+        <div class="toolbar-filters">
+          <div class="input-group">
+            <label class="input-label">Buscar por nombre</label>
+            <div class="input-field">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" placeholder="Buscar...">
+            </div>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Buscar por cargo</label>
+            <div class="input-field">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" placeholder="Buscar...">
+            </div>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Estado</label>
+            <div class="input-field">
+              <input type="text" placeholder="Todos" style="flex:1;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="toolbar-row">
+          <span class="results-count">Personas asignadas: 20</span>
+          <button class="btn btn--lg btn--primary">Agregar persona</button>
+        </div>
+      </div>
+
+      <!-- TABLE -->
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Rol</th>
+              <th>RUT</th>
+              <th>Fecha ingreso</th>
+              <th>Fecha egreso</th>
+              <th>Estado</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Silvio Traverso</td>
+              <td>Cargo</td>
+              <td>0.000.000-0</td>
+              <td>17/07/2025</td>
+              <td>17/07/2026</td>
+              <td><span class="badge badge--positive">Aprobada</span></td>
+              <td>
+                <div class="action-wrap">
+                  <button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button>
+                  <div class="dropdown-menu">
+                    <div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Ver contrato</div>
+                    <div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/></svg>Ver Actividades</div>
+                    <div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>Carpeta Digital</div>
+                    <div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Ver CV</div>
+                    <div class="dropdown-item dropdown-item--danger"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/></svg>Archivar persona</div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>Silvio Traverso</td>
+              <td>Cargo</td>
+              <td>0.000.000-0</td>
+              <td>17/07/2025</td>
+              <td>17/07/2026</td>
+              <td><span class="badge badge--process">En proceso</span></td>
+              <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Ver contrato</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/></svg>Ver Actividades</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>Carpeta Digital</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Ver CV</div><div class="dropdown-item dropdown-item--danger">Archivar persona</div></div></div></td>
+            </tr>
+            <tr>
+              <td>Silvio Traverso</td>
+              <td>Cargo</td>
+              <td>0.000.000-0</td>
+              <td>17/07/2025</td>
+              <td>17/07/2026</td>
+              <td><span class="badge badge--positive">Aprobada</span></td>
+              <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver contrato</div><div class="dropdown-item">Ver Actividades</div><div class="dropdown-item">Carpeta Digital</div><div class="dropdown-item">Ver CV</div><div class="dropdown-item dropdown-item--danger">Archivar persona</div></div></div></td>
+            </tr>
+            <tr>
+              <td>Silvio Traverso</td>
+              <td>Cargo</td>
+              <td>0.000.000-0</td>
+              <td>17/07/2025</td>
+              <td>17/07/2026</td>
+              <td><span class="badge badge--negative">Rechazado</span></td>
+              <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver contrato</div><div class="dropdown-item">Ver Actividades</div><div class="dropdown-item">Carpeta Digital</div><div class="dropdown-item">Ver CV</div><div class="dropdown-item dropdown-item--danger">Archivar persona</div></div></div></td>
+            </tr>
+            <tr>
+              <td>Silvio Traverso</td>
+              <td>Cargo</td>
+              <td>0.000.000-0</td>
+              <td>17/07/2025</td>
+              <td>17/07/2026</td>
+              <td><span class="badge badge--process">En proceso</span></td>
+              <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver contrato</div><div class="dropdown-item">Ver Actividades</div><div class="dropdown-item">Carpeta Digital</div><div class="dropdown-item">Ver CV</div><div class="dropdown-item dropdown-item--danger">Archivar persona</div></div></div></td>
+            </tr>
+            <tr>
+              <td>Silvio Traverso</td>
+              <td>Cargo</td>
+              <td>0.000.000-0</td>
+              <td>17/07/2025</td>
+              <td>17/07/2026</td>
+              <td><span class="badge badge--positive">Aprobada</span></td>
+              <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver contrato</div><div class="dropdown-item">Ver Actividades</div><div class="dropdown-item">Carpeta Digital</div><div class="dropdown-item">Ver CV</div><div class="dropdown-item dropdown-item--danger">Archivar persona</div></div></div></td>
+            </tr>
+            <tr>
+              <td>Silvio Traverso</td>
+              <td>Cargo</td>
+              <td>0.000.000-0</td>
+              <td>17/07/2025</td>
+              <td>17/07/2026</td>
+              <td><span class="badge badge--neutral">Contratado</span></td>
+              <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver contrato</div><div class="dropdown-item">Ver Actividades</div><div class="dropdown-item">Carpeta Digital</div><div class="dropdown-item">Ver CV</div><div class="dropdown-item dropdown-item--danger">Archivar persona</div></div></div></td>
+            </tr>
+            <tr>
+              <td>Silvio Traverso</td>
+              <td>Cargo</td>
+              <td>0.000.000-0</td>
+              <td>17/07/2025</td>
+              <td>17/07/2026</td>
+              <td><span class="badge badge--positive">Aprobada</span></td>
+              <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver contrato</div><div class="dropdown-item">Ver Actividades</div><div class="dropdown-item">Carpeta Digital</div><div class="dropdown-item">Ver CV</div><div class="dropdown-item dropdown-item--danger">Archivar persona</div></div></div></td>
+            </tr>
+            <tr>
+              <td>Silvio Traverso</td>
+              <td>Cargo</td>
+              <td>0.000.000-0</td>
+              <td>17/07/2025</td>
+              <td>17/07/2026</td>
+              <td><span class="badge badge--process">En proceso</span></td>
+              <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver contrato</div><div class="dropdown-item">Ver Actividades</div><div class="dropdown-item">Carpeta Digital</div><div class="dropdown-item">Ver CV</div><div class="dropdown-item dropdown-item--danger">Archivar persona</div></div></div></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="table-footer">
+          <div class="table-footer-left">
+            <span>Rows per page:</span>
+            <select class="table-footer-select"><option>10</option><option>20</option><option>50</option></select>
+            <span>1 - 10 of 20</span>
+          </div>
+          <div class="table-footer-arrows">
+            <button class="table-footer-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="table-footer-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /content-area -->
+
+  </main>
+</div><!-- /layout -->
+
+</body>
+</html>
