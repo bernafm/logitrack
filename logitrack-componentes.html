@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LOGITRACK – Dashboard Componentes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    svg { display: block; }
+
+    :root {
+      --blue:       #1F4085;
+      --red:        #EF4F3E;
+      --gray-50:    #F8FAFC;
+      --gray-100:   #F1F5F9;
+      --gray-200:   #E2E8F0;
+      --gray-300:   #CBD5E1;
+      --gray-400:   #94A3B8;
+      --gray-500:   #64748B;
+      --gray-700:   #334155;
+      --green-bg:   #ECFDF5;
+      --green-txt:  #34D399;
+      --white:      #FFFFFF;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: #F1F5F9;
+      color: var(--gray-700);
+      padding: 48px 64px;
+      min-height: 100vh;
+    }
+
+    /* ── PAGE TITLE ─────────────────────────────────── */
+    .page-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--gray-700);
+      margin-bottom: 48px;
+    }
+
+    /* ── SECTION ────────────────────────────────────── */
+    .section {
+      margin-bottom: 64px;
+    }
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--gray-400);
+      margin-bottom: 6px;
+    }
+    .section-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--gray-700);
+      margin-bottom: 4px;
+    }
+    .section-desc {
+      font-size: 14px;
+      color: var(--gray-500);
+      margin-bottom: 24px;
+    }
+    .variants-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    .variant-block {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .variant-name {
+      font-size: 12px;
+      color: var(--gray-400);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+    }
+    hr.divider {
+      border: none;
+      border-top: 1px solid var(--gray-200);
+      margin-bottom: 64px;
+    }
+
+    /* ══════════════════════════════════════════════════
+       1. COMPONENT: dash_title
+       Figma: 697:6411 — gap=24, icon 32x32 + text 24px/700
+    ══════════════════════════════════════════════════ */
+    .dash-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .dash-title__icon {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .dash-title__icon svg { color: var(--red); }
+    .dash-title__text {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    /* ══════════════════════════════════════════════════
+       2. COMPONENT: card_dash
+       Figma: 706:7641 — 262x80, #F8FAFC, pad=16, gap=12
+       4 variants: Activos / Pendientes / Próximos / Cerrados
+    ══════════════════════════════════════════════════ */
+    .card-dash {
+      width: 262px;
+      height: 80px;
+      background: var(--gray-50);
+      border-radius: 10px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .card-dash__left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .card-dash__icon {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .card-dash__icon svg { color: var(--red); width: 24px; height: 24px; }
+    .card-dash__title {
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--blue);
+    }
+    .card-dash__value {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--blue);
+      line-height: 1;
+    }
+
+    /* ══════════════════════════════════════════════════
+       3. COMPONENT: card_proyectos
+       Figma: 702:3108 — 500x249, white, pad=24, gap=12
+       Variants: with thumbnail / sin thumbnail (dashboard)
+    ══════════════════════════════════════════════════ */
+    .card-proyectos {
+      width: 500px;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .card-proyectos--no-thumb {
+      width: 570px;
+    }
+    .card-proyectos__info-container {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .card-proyectos__thumb {
+      width: 120px;
+      height: 143px;
+      background: #D9D9D9;
+      border-radius: 12px;
+      flex-shrink: 0;
+    }
+    .card-proyectos__project-info {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      flex: 1;
+    }
+    .card-proyectos__details {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .card-proyectos__title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .card-proyectos__name {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--blue);
+    }
+    .card-proyectos__company {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--gray-500);
+    }
+    .card-proyectos__dates {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--gray-500);
+    }
+
+    /* Badge "Al día" */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 400;
+      white-space: nowrap;
+    }
+    .badge--green { background: var(--green-bg); color: var(--green-txt); }
+
+    /* ══════════════════════════════════════════════════
+       4. COMPONENT: Progress bar
+       Figma: 698:3451 — 320x21, 11 variants (0%–100%)
+       Track: 8px height, gray bg; Fill: blue
+    ══════════════════════════════════════════════════ */
+    .progress-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 320px;
+    }
+    .progress-bar__track {
+      flex: 1;
+      height: 8px;
+      background: var(--gray-100);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .progress-bar__fill {
+      height: 100%;
+      background: var(--blue);
+      border-radius: 99px;
+      transition: width .3s;
+    }
+    .progress-bar__label {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--gray-700);
+      width: 36px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    /* ══════════════════════════════════════════════════
+       5. COMPONENT: card_project_dash (mini-stat)
+       Figma: 697:4450 — 107x46, #F8FAFC, pad=8, gap=12
+       4 variants: Users / Box / Truck / Archive
+    ══════════════════════════════════════════════════ */
+    .card-project-dash {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--gray-50);
+      border-radius: 8px;
+      padding: 8px;
+      width: 107px;
+      height: 46px;
+    }
+    .card-project-dash__icon {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-project-dash__icon svg { color: var(--red); width: 16px; height: 16px; }
+    .card-project-dash__info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .card-project-dash__title {
+      font-size: 10px;
+      font-weight: 400;
+      color: var(--blue);
+      white-space: nowrap;
+      line-height: 1;
+    }
+    .card-project-dash__value {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--blue);
+      line-height: 1;
+    }
+
+    /* ══════════════════════════════════════════════════
+       6. COMPONENT: tabs_dashboard
+       Figma: 698:3271 — 4 variants (one per active tab)
+       Tab_selected: 700 #1f4085 + blue underline
+       Tab_disabled: 400 #94a3b8
+    ══════════════════════════════════════════════════ */
+    .tabs-dashboard {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .tab {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 10px;
+      height: 40px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--gray-400);
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      white-space: nowrap;
+      transition: color .15s;
+      background: none;
+      border-left: none;
+      border-right: none;
+      border-top: none;
+    }
+    .tab:hover { color: var(--gray-500); }
+    .tab.tab--active {
+      font-weight: 700;
+      color: var(--blue);
+      border-bottom: 2px solid var(--blue);
+    }
+    .tab__icon {
+      width: 16px;
+      height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .tab__icon svg { width: 16px; height: 16px; }
+    .tab--active .tab__icon svg { color: var(--blue); }
+    .tab:not(.tab--active) .tab__icon svg { color: var(--gray-400); }
+
+    /* ══════════════════════════════════════════════════
+       7. COMPONENT: Button base XL
+       Figma: 702:3336 — 214x59, #1F4085, pad=16, text 18px/400
+    ══════════════════════════════════════════════════ */
+    .btn-xl {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px;
+      height: 59px;
+      background: var(--blue);
+      color: #FAFAFA;
+      border: none;
+      border-radius: 10px;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity .15s;
+    }
+    .btn-xl:hover { opacity: .9; }
+
+    /* ══════════════════════════════════════════════════
+       8. COMPONENT: Input fields
+       Figma — 320x48, white bg, pad=12, gap=8
+       Variants: text / dropdown
+    ══════════════════════════════════════════════════ */
+    .input-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      width: 320px;
+    }
+    .input-field__label {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--gray-700);
+    }
+    .input-field__control {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      height: 48px;
+      background: var(--white);
+      border: 1px solid var(--gray-300);
+      border-radius: 8px;
+      padding: 0 12px;
+    }
+    .input-field__control input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 16px;
+      color: var(--gray-700);
+      background: transparent;
+    }
+    .input-field__control input::placeholder { color: var(--gray-500); }
+    .input-field__control svg { color: var(--gray-400); width: 20px; height: 20px; flex-shrink: 0; }
+
+    /* ══════════════════════════════════════════════════
+       ASSEMBLED: pantalla_dashboard preview
+    ══════════════════════════════════════════════════ */
+    .screen-preview {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      border: 1px solid var(--gray-200);
+    }
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .status-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .filters-area {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .input-row {
+      display: flex;
+      gap: 12px;
+      align-items: flex-end;
+    }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+    }
+    /* project card action row (inside card) */
+    .card-proyectos__actions {
+      display: flex;
+      gap: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 class="page-title">Dashboard</h1>
+
+  <!-- ══════════════════════════════════════════════
+       1. dash_title
+  ══════════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-label">Componente</div>
+    <div class="section-name">dash_title</div>
+    <div class="section-desc">Encabezado de sección. Ícono 32×32 rojo + texto 24px/700 azul.</div>
+    <div class="variants-row">
+
+      <div class="variant-block">
+        <div class="variant-name">Dashboard</div>
+        <div class="dash-title">
+          <div class="dash-title__icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+              <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+            </svg>
+          </div>
+          <span class="dash-title__text">Dashboard Proyectos</span>
+        </div>
+      </div>
+
+      <div class="variant-block">
+        <div class="variant-name">Personas</div>
+        <div class="dash-title">
+          <div class="dash-title__icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <span class="dash-title__text">Personas</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <hr class="divider"/>
+
+  <!-- ══════════════════════════════════════════════
+       2. card_dash — 4 variantes
+  ══════════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-label">Componente · COMPONENT_SET</div>
+    <div class="section-name">card_dash</div>
+    <div class="section-desc">Tarjeta de estado para el dashboard. 262×80px, bg #F8FAFC, padding 16px. 4 variantes según tipo de estado.</div>
+    <div class="variants-row">
+
+      <!-- Variant 1: Activos (check-circle) -->
+      <div class="variant-block">
+        <div class="variant-name">Default — Activos</div>
+        <div class="card-dash">
+          <div class="card-dash__left">
+            <div class="card-dash__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </div>
+            <span class="card-dash__title">Activos</span>
+          </div>
+          <span class="card-dash__value">20</span>
+        </div>
+      </div>
+
+      <!-- Variant 2: Pendientes (clock) -->
+      <div class="variant-block">
+        <div class="variant-name">Variant2 — Pendientes</div>
+        <div class="card-dash">
+          <div class="card-dash__left">
+            <div class="card-dash__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <span class="card-dash__title">Pendientes</span>
+          </div>
+          <span class="card-dash__value">5</span>
+        </div>
+      </div>
+
+      <!-- Variant 3: Próximos (calendar) -->
+      <div class="variant-block">
+        <div class="variant-name">Variant3 — Próximos</div>
+        <div class="card-dash">
+          <div class="card-dash__left">
+            <div class="card-dash__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+            </div>
+            <span class="card-dash__title">Próximos</span>
+          </div>
+          <span class="card-dash__value">2</span>
+        </div>
+      </div>
+
+      <!-- Variant 4: Cerrados (archive) -->
+      <div class="variant-block">
+        <div class="variant-name">Variant4 — Cerrados</div>
+        <div class="card-dash">
+          <div class="card-dash__left">
+            <div class="card-dash__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="21 8 21 21 3 21 3 8"/>
+                <rect x="1" y="3" width="22" height="5"/>
+                <line x1="10" y1="12" x2="14" y2="12"/>
+              </svg>
+            </div>
+            <span class="card-dash__title">Cerrados</span>
+          </div>
+          <span class="card-dash__value">3</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <hr class="divider"/>
+
+  <!-- ══════════════════════════════════════════════
+       3. tabs_dashboard — 4 variantes (un tab activo)
+  ══════════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-label">Componente · COMPONENT_SET</div>
+    <div class="section-name">tabs_dashboard</div>
+    <div class="section-desc">Barra de pestañas. 40px alto. Tab activo: 700/azul + borde inferior. Tab inactivo: 400/gris. 4 variantes (una por pestaña activa).</div>
+    <div class="variants-row" style="flex-direction:column; gap:32px;">
+
+      <!-- Variant 1: Activos activo -->
+      <div class="variant-block">
+        <div class="variant-name">Property 1=Default — Activos activo</div>
+        <div class="tabs-dashboard">
+          <button class="tab tab--active">
+            <span class="tab__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </span>
+            Activos
+          </button>
+          <button class="tab">
+            <span class="tab__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </span>
+            Pendientes
+          </button>
+          <button class="tab">
+            <span class="tab__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+            </span>
+            Próximos
+          </button>
+          <button class="tab">
+            <span class="tab__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/>
+                <line x1="10" y1="12" x2="14" y2="12"/>
+              </svg>
+            </span>
+            Cerrados
+          </button>
+        </div>
+      </div>
+
+      <!-- Variant 2: Pendientes activo -->
+      <div class="variant-block">
+        <div class="variant-name">Property 1=Variant2 — Pendientes activo</div>
+        <div class="tabs-dashboard">
+          <button class="tab">
+            <span class="tab__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span>
+            Activos
+          </button>
+          <button class="tab tab--active">
+            <span class="tab__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+            Pendientes
+          </button>
+          <button class="tab">
+            <span class="tab__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+            Próximos
+          </button>
+          <button class="tab">
+            <span class="tab__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg></span>
+            Cerrados
+          </button>
+        </div>
+      </div>
+
+      <!-- Variant 3: Próximos activo -->
+      <div class="variant-block">
+        <div class="variant-name">Property 1=Variant3 — Próximos activo</div>
+        <div class="tabs-dashboard">
+          <button class="tab"><span class="tab__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span>Activos</button>
+          <button class="tab"><span class="tab__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>Pendientes</button>
+          <button class="tab tab--active"><span class="tab__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>Próximos</button>
+          <button class="tab"><span class="tab__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg></span>Cerrados</button>
+        </div>
+      </div>
+
+      <!-- Variant 4: Cerrados activo -->
+      <div class="variant-block">
+        <div class="variant-name">Property 1=Variant4 — Cerrados activo</div>
+        <div class="tabs-dashboard">
+          <button class="tab"><span class="tab__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span>Activos</button>
+          <button class="tab"><span class="tab__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>Pendientes</button>
+          <button class="tab"><span class="tab__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>Próximos</button>
+          <button class="tab tab--active"><span class="tab__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg></span>Cerrados</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <hr class="divider"/>
+
+  <!-- ══════════════════════════════════════════════
+       4. Progress bar — 11 variantes
+  ══════════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-label">Componente · COMPONENT_SET</div>
+    <div class="section-name">Progress bar</div>
+    <div class="section-desc">320px ancho, track de 8px altura (#F1F5F9), fill azul (#1F4085). Label a la derecha 14px. 11 variantes: 0% a 100%.</div>
+    <div class="variants-row" style="flex-direction:column; gap:12px;">
+      <div class="variant-block"><div class="variant-name">0%</div>
+        <div class="progress-bar"><div class="progress-bar__track"><div class="progress-bar__fill" style="width:0%"></div></div><span class="progress-bar__label">0%</span></div>
+      </div>
+      <div class="variant-block"><div class="variant-name">10%</div>
+        <div class="progress-bar"><div class="progress-bar__track"><div class="progress-bar__fill" style="width:10%"></div></div><span class="progress-bar__label">10%</span></div>
+      </div>
+      <div class="variant-block"><div class="variant-name">20%</div>
+        <div class="progress-bar"><div class="progress-bar__track"><div class="progress-bar__fill" style="width:20%"></div></div><span class="progress-bar__label">20%</span></div>
+      </div>
+      <div class="variant-block"><div class="variant-name">30%</div>
+        <div class="progress-bar"><div class="progress-bar__track"><div class="progress-bar__fill" style="width:30%"></div></div><span class="progress-bar__label">30%</span></div>
+      </div>
+      <div class="variant-block"><div class="variant-name">40%</div>
+        <div class="progress-bar"><div class="progress-bar__track"><div class="progress-bar__fill" style="width:40%"></div></div><span class="progress-bar__label">40%</span></div>
+      </div>
+      <div class="variant-block"><div class="variant-name">50%</div>
+        <div class="progress-bar"><div class="progress-bar__track"><div class="progress-bar__fill" style="width:50%"></div></div><span class="progress-bar__label">50%</span></div>
+      </div>
+      <div class="variant-block"><div class="variant-name">60%</div>
+        <div class="progress-bar"><div class="progress-bar__track"><div class="progress-bar__fill" style="width:60%"></div></div><span class="progress-bar__label">60%</span></div>
+      </div>
+      <div class="variant-block"><div class="variant-name">70%</div>
+        <div class="progress-bar"><div class="progress-bar__track"><div class="progress-bar__fill" style="width:70%"></div></div><span class="progress-bar__label">70%</span></div>
+      </div>
+      <div class="variant-block"><div class="variant-name">80%</div>
+        <div class="progress-bar"><div class="progress-bar__track"><div class="progress-bar__fill" style="width:80%"></div></div><span class="progress-bar__label">80%</span></div>
+      </div>
+      <div class="variant-block"><div class="variant-name">90%</div>
+        <div class="progress-bar"><div class="progress-bar__track"><div class="progress-bar__fill" style="width:90%"></div></div><span class="progress-bar__label">90%</span></div>
+      </div>
+      <div class="variant-block"><div class="variant-name">100%</div>
+        <div class="progress-bar"><div class="progress-bar__track"><div class="progress-bar__fill" style="width:100%"></div></div><span class="progress-bar__label">100%</span></div>
+      </div>
+    </div>
+  </section>
+  <hr class="divider"/>
+
+  <!-- ══════════════════════════════════════════════
+       5. card_project_dash — 4 variantes (mini-stat)
+  ══════════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-label">Componente · COMPONENT_SET</div>
+    <div class="section-name">card_project_dash</div>
+    <div class="section-desc">Tarjeta mini-stat para proyectos. 107×46px, bg #F8FAFC, padding 8px, gap 12px. 4 variantes según ícono.</div>
+    <div class="variants-row">
+
+      <!-- Default: Users -->
+      <div class="variant-block">
+        <div class="variant-name">Default — Personas</div>
+        <div class="card-project-dash">
+          <div class="card-project-dash__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <div class="card-project-dash__info">
+            <span class="card-project-dash__title">Personas</span>
+            <span class="card-project-dash__value">20</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Variant3: Box/Carpetas -->
+      <div class="variant-block">
+        <div class="variant-name">Variant3 — Carpetas</div>
+        <div class="card-project-dash">
+          <div class="card-project-dash__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+            </svg>
+          </div>
+          <div class="card-project-dash__info">
+            <span class="card-project-dash__title">Carpetas</span>
+            <span class="card-project-dash__value">20</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Variant4: Truck/Equipos -->
+      <div class="variant-block">
+        <div class="variant-name">Variant4 — Equipos</div>
+        <div class="card-project-dash">
+          <div class="card-project-dash__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+              <circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+            </svg>
+          </div>
+          <div class="card-project-dash__info">
+            <span class="card-project-dash__title">Equipos</span>
+            <span class="card-project-dash__value">20</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Variant4b: Archive/Documentos -->
+      <div class="variant-block">
+        <div class="variant-name">Variant4b — Documentos</div>
+        <div class="card-project-dash">
+          <div class="card-project-dash__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="21 8 21 21 3 21 3 8"/>
+              <rect x="1" y="3" width="22" height="5"/>
+              <line x1="10" y1="12" x2="14" y2="12"/>
+            </svg>
+          </div>
+          <div class="card-project-dash__info">
+            <span class="card-project-dash__title">Documentos</span>
+            <span class="card-project-dash__value">20</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <hr class="divider"/>
+
+  <!-- ══════════════════════════════════════════════
+       6. card_proyectos — 2 variantes
+  ══════════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-label">Componente</div>
+    <div class="section-name">card_proyectos</div>
+    <div class="section-desc">Tarjeta de proyecto. Padding 24px, gap 12px. Variante con thumbnail (500px) y sin thumbnail (570px, usada en dashboard).</div>
+    <div class="variants-row" style="align-items:flex-start;">
+
+      <!-- Con thumbnail -->
+      <div class="variant-block">
+        <div class="variant-name">Con thumbnail (base component)</div>
+        <div class="card-proyectos">
+          <div class="card-proyectos__info-container">
+            <div class="card-proyectos__thumb"></div>
+            <div class="card-proyectos__project-info">
+              <div class="card-proyectos__details">
+                <div>
+                  <div class="card-proyectos__title-row">
+                    <span class="card-proyectos__name">Nombre Proyecto</span>
+                    <span class="badge badge--green">Al día</span>
+                  </div>
+                  <div class="card-proyectos__company">Nombre Empresa</div>
+                </div>
+                <div class="progress-bar" style="width:100%">
+                  <div class="progress-bar__track" style="flex:1">
+                    <div class="progress-bar__fill" style="width:80%"></div>
+                  </div>
+                  <span class="progress-bar__label">80%</span>
+                </div>
+                <div class="card-proyectos__dates">Fechas de proyecto (yyyy-yyyy)</div>
+              </div>
+            </div>
+          </div>
+          <div class="card-proyectos__actions">
+            <div class="card-project-dash">
+              <div class="card-project-dash__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+              <div class="card-project-dash__info"><span class="card-project-dash__title">Personas</span><span class="card-project-dash__value">20</span></div>
+            </div>
+            <div class="card-project-dash">
+              <div class="card-project-dash__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
+              <div class="card-project-dash__info"><span class="card-project-dash__title">Carpetas</span><span class="card-project-dash__value">20</span></div>
+            </div>
+            <div class="card-project-dash">
+              <div class="card-project-dash__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+              <div class="card-project-dash__info"><span class="card-project-dash__title">Equipos</span><span class="card-project-dash__value">20</span></div>
+            </div>
+            <div class="card-project-dash">
+              <div class="card-project-dash__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg></div>
+              <div class="card-project-dash__info"><span class="card-project-dash__title">Documentos</span><span class="card-project-dash__value">20</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sin thumbnail (dashboard variant) -->
+      <div class="variant-block">
+        <div class="variant-name">Sin thumbnail (pantalla_dashboard)</div>
+        <div class="card-proyectos card-proyectos--no-thumb">
+          <div class="card-proyectos__info-container">
+            <div class="card-proyectos__project-info">
+              <div class="card-proyectos__details">
+                <div>
+                  <div class="card-proyectos__title-row">
+                    <span class="card-proyectos__name">Nombre Proyecto</span>
+                    <span class="badge badge--green">Al día</span>
+                  </div>
+                  <div class="card-proyectos__company">Nombre Empresa</div>
+                </div>
+                <div class="progress-bar" style="width:100%">
+                  <div class="progress-bar__track" style="flex:1">
+                    <div class="progress-bar__fill" style="width:80%"></div>
+                  </div>
+                  <span class="progress-bar__label">80%</span>
+                </div>
+                <div class="card-proyectos__dates">Fechas de proyecto (yyyy-yyyy)</div>
+              </div>
+            </div>
+          </div>
+          <div class="card-proyectos__actions">
+            <div class="card-project-dash" style="width:auto; flex:1;">
+              <div class="card-project-dash__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+              <div class="card-project-dash__info"><span class="card-project-dash__title">Personas</span><span class="card-project-dash__value">20</span></div>
+            </div>
+            <div class="card-project-dash" style="width:auto; flex:1;">
+              <div class="card-project-dash__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
+              <div class="card-project-dash__info"><span class="card-project-dash__title">Carpetas</span><span class="card-project-dash__value">20</span></div>
+            </div>
+            <div class="card-project-dash" style="width:auto; flex:1;">
+              <div class="card-project-dash__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+              <div class="card-project-dash__info"><span class="card-project-dash__title">Equipos</span><span class="card-project-dash__value">20</span></div>
+            </div>
+            <div class="card-project-dash" style="width:auto; flex:1;">
+              <div class="card-project-dash__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg></div>
+              <div class="card-project-dash__info"><span class="card-project-dash__title">Documentos</span><span class="card-project-dash__value">20</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <hr class="divider"/>
+
+  <!-- ══════════════════════════════════════════════
+       7. Button base XL + Input fields
+  ══════════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-label">Componentes</div>
+    <div class="section-name">Button base XL + Input fields</div>
+    <div class="section-desc">Botón primario XL: 59px alto, padding 16px, azul, texto 18px/400. Inputs: 320×48px, padding 12px.</div>
+    <div class="variants-row" style="align-items:flex-end; gap:24px;">
+
+      <div class="variant-block">
+        <div class="variant-name">Button base XL</div>
+        <button class="btn-xl">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+          Crear nuevo proyecto
+        </button>
+      </div>
+
+      <div class="variant-block">
+        <div class="variant-name">Input text</div>
+        <div class="input-field">
+          <label class="input-field__label">Buscar</label>
+          <div class="input-field__control">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" placeholder="Nombre proyecto" />
+          </div>
+        </div>
+      </div>
+
+      <div class="variant-block">
+        <div class="variant-name">Input dropdown</div>
+        <div class="input-field">
+          <label class="input-field__label">Ubicación</label>
+          <div class="input-field__control">
+            <input type="text" placeholder="Seleccionar" style="flex:1" />
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="variant-block">
+        <div class="variant-name">Input dropdown</div>
+        <div class="input-field">
+          <label class="input-field__label">Estado</label>
+          <div class="input-field__control">
+            <input type="text" placeholder="Seleccionar" style="flex:1" />
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <hr class="divider"/>
+
+  <!-- ══════════════════════════════════════════════
+       8. pantalla_dashboard — preview ensamblado
+  ══════════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="section-label">Pantalla ensamblada</div>
+    <div class="section-name">pantalla_dashboard</div>
+    <div class="section-desc">Vista completa usando todos los componentes anteriores. 1224×886px, padding 24px, gap 24px.</div>
+
+    <div class="screen-preview">
+
+      <!-- Top Bar -->
+      <div class="top-bar">
+        <div class="dash-title">
+          <div class="dash-title__icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+              <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+            </svg>
+          </div>
+          <span class="dash-title__text">Dashboard Proyectos</span>
+        </div>
+        <button class="btn-xl">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+          Crear nuevo proyecto
+        </button>
+      </div>
+
+      <!-- Status indicators -->
+      <div class="status-row">
+        <div class="card-dash" style="width:auto">
+          <div class="card-dash__left">
+            <div class="card-dash__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+            <span class="card-dash__title">Activos</span>
+          </div>
+          <span class="card-dash__value">20</span>
+        </div>
+        <div class="card-dash" style="width:auto">
+          <div class="card-dash__left">
+            <div class="card-dash__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <span class="card-dash__title">Pendientes</span>
+          </div>
+          <span class="card-dash__value">5</span>
+        </div>
+        <div class="card-dash" style="width:auto">
+          <div class="card-dash__left">
+            <div class="card-dash__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+            <span class="card-dash__title">Próximos</span>
+          </div>
+          <span class="card-dash__value">2</span>
+        </div>
+        <div class="card-dash" style="width:auto">
+          <div class="card-dash__left">
+            <div class="card-dash__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg></div>
+            <span class="card-dash__title">Cerrados</span>
+          </div>
+          <span class="card-dash__value">3</span>
+        </div>
+      </div>
+
+      <!-- Filters -->
+      <div class="filters-area">
+        <div class="tabs-dashboard">
+          <button class="tab tab--active"><span class="tab__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span>Activos</button>
+          <button class="tab"><span class="tab__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>Pendientes</button>
+          <button class="tab"><span class="tab__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>Próximos</button>
+          <button class="tab"><span class="tab__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg></span>Cerrados</button>
+        </div>
+        <div class="input-row">
+          <div class="input-field">
+            <label class="input-field__label">Buscar</label>
+            <div class="input-field__control">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" placeholder="Nombre proyecto" />
+            </div>
+          </div>
+          <div class="input-field">
+            <label class="input-field__label">Ubicación</label>
+            <div class="input-field__control">
+              <input type="text" placeholder="Seleccionar" style="flex:1" />
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+          </div>
+          <div class="input-field">
+            <label class="input-field__label">Estado</label>
+            <div class="input-field__control">
+              <input type="text" placeholder="Seleccionar" style="flex:1" />
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project Cards grid -->
+      <div class="cards-grid">
+        <div class="card-proyectos card-proyectos--no-thumb" style="width:100%">
+          <div class="card-proyectos__info-container">
+            <div class="card-proyectos__project-info">
+              <div class="card-proyectos__details">
+                <div>
+                  <div class="card-proyectos__title-row">
+                    <span class="card-proyectos__name">Nombre Proyecto</span>
+                    <span class="badge badge--green">Al día</span>
+                  </div>
+                  <div class="card-proyectos__company">Nombre Empresa</div>
+                </div>
+                <div class="progress-bar" style="width:100%"><div class="progress-bar__track" style="flex:1"><div class="progress-bar__fill" style="width:80%"></div></div><span class="progress-bar__label">80%</span></div>
+                <div class="card-proyectos__dates">Fechas de proyecto (yyyy-yyyy)</div>
+              </div>
+            </div>
+          </div>
+          <div class="card-proyectos__actions">
+            <div class="card-project-dash" style="width:auto;flex:1"><div class="card-project-dash__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="card-project-dash__info"><span class="card-project-dash__title">Personas</span><span class="card-project-dash__value">20</span></div></div>
+            <div class="card-project-dash" style="width:auto;flex:1"><div class="card-project-dash__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div><div class="card-project-dash__info"><span class="card-project-dash__title">Carpetas</span><span class="card-project-dash__value">20</span></div></div>
+            <div class="card-project-dash" style="width:auto;flex:1"><div class="card-project-dash__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><div class="card-project-dash__info"><span class="card-project-dash__title">Equipos</span><span class="card-project-dash__value">20</span></div></div>
+            <div class="card-project-dash" style="width:auto;flex:1"><div class="card-project-dash__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg></div><div class="card-project-dash__info"><span class="card-project-dash__title">Documentos</span><span class="card-project-dash__value">20</span></div></div>
+          </div>
+        </div>
+        <div class="card-proyectos card-proyectos--no-thumb" style="width:100%">
+          <div class="card-proyectos__info-container">
+            <div class="card-proyectos__project-info">
+              <div class="card-proyectos__details">
+                <div>
+                  <div class="card-proyectos__title-row">
+                    <span class="card-proyectos__name">Nombre Proyecto</span>
+                    <span class="badge badge--green">Al día</span>
+                  </div>
+                  <div class="card-proyectos__company">Nombre Empresa</div>
+                </div>
+                <div class="progress-bar" style="width:100%"><div class="progress-bar__track" style="flex:1"><div class="progress-bar__fill" style="width:45%"></div></div><span class="progress-bar__label">45%</span></div>
+                <div class="card-proyectos__dates">Fechas de proyecto (yyyy-yyyy)</div>
+              </div>
+            </div>
+          </div>
+          <div class="card-proyectos__actions">
+            <div class="card-project-dash" style="width:auto;flex:1"><div class="card-project-dash__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="card-project-dash__info"><span class="card-project-dash__title">Personas</span><span class="card-project-dash__value">12</span></div></div>
+            <div class="card-project-dash" style="width:auto;flex:1"><div class="card-project-dash__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div><div class="card-project-dash__info"><span class="card-project-dash__title">Carpetas</span><span class="card-project-dash__value">8</span></div></div>
+            <div class="card-project-dash" style="width:auto;flex:1"><div class="card-project-dash__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><div class="card-project-dash__info"><span class="card-project-dash__title">Equipos</span><span class="card-project-dash__value">5</span></div></div>
+            <div class="card-project-dash" style="width:auto;flex:1"><div class="card-project-dash__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg></div><div class="card-project-dash__info"><span class="card-project-dash__title">Documentos</span><span class="card-project-dash__value">3</span></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</body>
+</html>
