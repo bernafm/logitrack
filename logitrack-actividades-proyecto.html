@@ -212,29 +212,9 @@ body {
 .ver-datos-link svg { transition: transform .2s; }
 .ver-datos-link.open svg { transform: rotate(90deg); }
 
-/* ── PERSON DETAILS – EXPANDED ───────────────── */
-.person-details {
-  display: none;
-  background: var(--gray-50);
-  border: 1px solid var(--gray-200);
-  border-top: none;
-  border-radius: 0 0 12px 12px;
-  padding: 20px 20px 24px;
-}
-.person-details.open { display: block; }
-.person-details-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px 32px;
-  margin-bottom: 20px;
-}
-.detail-item { display: flex; flex-direction: column; gap: 3px; }
-.detail-label { font-size: 12px; color: var(--gray-500); text-transform: uppercase; letter-spacing: .4px; }
-.detail-value { font-size: 14px; font-weight: 600; color: var(--gray-700); }
-.person-details__divider { height: 1px; background: var(--gray-200); margin: 16px 0; }
-.person-details__row { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
-.detail-contact { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--gray-500); }
-.detail-contact svg { color: var(--red); flex-shrink: 0; }
+/* ── PERSONA NAVBAR EXPANDED ─────────────────── */
+.persona-data-extra { display: none; }
+.persona-navbar.expanded .persona-data-extra { display: block; }
 
 /* ── TOOLBAR ─────────────────────────────────── */
 .toolbar { display: flex; flex-direction: column; gap: 14px; }
@@ -263,6 +243,17 @@ body {
   cursor: pointer; white-space: nowrap;
 }
 .btn-primary:hover { opacity: .9; }
+
+/* ── BADGES ──────────────────────────────────── */
+.badge {
+  display: inline-flex; align-items: center;
+  padding: 4px 10px; border-radius: 20px;
+  font-size: 12px; font-weight: 600; white-space: nowrap;
+}
+.badge--positive { background: var(--green-bg); color: #059669; }
+.badge--yellow   { background: var(--yellow-bg); color: #B45309; }
+.badge--negative { background: var(--red-bg); color: var(--red-light); }
+.badge--neutral  { background: var(--gray-100); color: var(--gray-500); }
 
 /* ── TABLE ───────────────────────────────────── */
 .table-wrap { border: 1px solid var(--gray-200); border-radius: 12px; overflow: hidden; }
@@ -405,11 +396,29 @@ tbody tr:nth-child(even) td { background: white; }
               <span class="persona-data-label">RUT:</span>
               <span class="persona-data-label">Edad:</span>
               <span class="persona-data-label">Experiencia:</span>
+              <span class="persona-data-label persona-data-extra">Nacionalidad:</span>
+              <span class="persona-data-label persona-data-extra">Género:</span>
+              <span class="persona-data-label persona-data-extra">Hijos:</span>
+              <span class="persona-data-label persona-data-extra">Estado civil:</span>
+              <span class="persona-data-label persona-data-extra">Dirección:</span>
+              <span class="persona-data-label persona-data-extra">Celular:</span>
+              <span class="persona-data-label persona-data-extra">Teléfono fijo:</span>
+              <span class="persona-data-label persona-data-extra">Correo:</span>
+              <span class="persona-data-label persona-data-extra">Discapacidad:</span>
             </div>
             <div class="persona-data-values">
               <span class="persona-data-value">17.616.256-5</span>
               <span class="persona-data-value">35 años</span>
               <span class="persona-data-value">5 años</span>
+              <span class="persona-data-value persona-data-extra">Chilena</span>
+              <span class="persona-data-value persona-data-extra">Masculino</span>
+              <span class="persona-data-value persona-data-extra">2</span>
+              <span class="persona-data-value persona-data-extra">Casado</span>
+              <span class="persona-data-value persona-data-extra">Santiago, Chile</span>
+              <span class="persona-data-value persona-data-extra">+569 99312452</span>
+              <span class="persona-data-value persona-data-extra">+562 23456789</span>
+              <span class="persona-data-value persona-data-extra">silvio.traverso@empresa.cl</span>
+              <span class="persona-data-value persona-data-extra">No</span>
             </div>
           </div>
         </div>
@@ -423,59 +432,6 @@ tbody tr:nth-child(even) td { background: white; }
           Ver datos generales
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#EF4F3E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
-      </div>
-    </div>
-
-    <!-- PERSON DETAILS – EXPANDED (Variante 2) -->
-    <div class="person-details" id="personDetails">
-      <div class="person-details-grid">
-        <div class="detail-item">
-          <span class="detail-label">Nombre completo</span>
-          <span class="detail-value">Silvio Traverso</span>
-        </div>
-        <div class="detail-item">
-          <span class="detail-label">RUT</span>
-          <span class="detail-value">0.000.000-0</span>
-        </div>
-        <div class="detail-item">
-          <span class="detail-label">Rol / Cargo</span>
-          <span class="detail-value">Cargo</span>
-        </div>
-        <div class="detail-item">
-          <span class="detail-label">Estado</span>
-          <span class="detail-value"><span class="badge badge--positive">Aprobada</span></span>
-        </div>
-        <div class="detail-item">
-          <span class="detail-label">Fecha ingreso</span>
-          <span class="detail-value">17/07/2025</span>
-        </div>
-        <div class="detail-item">
-          <span class="detail-label">Fecha egreso</span>
-          <span class="detail-value">17/07/2026</span>
-        </div>
-        <div class="detail-item">
-          <span class="detail-label">Experiencia</span>
-          <span class="detail-value">3 años</span>
-        </div>
-        <div class="detail-item">
-          <span class="detail-label">Proyecto</span>
-          <span class="detail-value">Radomiro Tomic</span>
-        </div>
-      </div>
-      <div class="person-details__divider"></div>
-      <div class="person-details__row">
-        <div class="detail-contact">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.44 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.78a16 16 0 0 0 6.29 6.29l.93-.93a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          +569 99312452
-        </div>
-        <div class="detail-contact">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          silvio.traverso@empresa.cl
-        </div>
-        <div class="detail-contact">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Santiago, Chile
-        </div>
       </div>
     </div>
 
@@ -519,85 +475,74 @@ tbody tr:nth-child(even) td { background: white; }
         <thead>
           <tr>
             <th>Actividad</th>
-            <th>Tipo</th>
-            <th>Fecha inicio</th>
-            <th>Fecha término</th>
-            <th>Duración</th>
+            <th>Grupo Actividad</th>
+            <th>Asignación</th>
+            <th>Días</th>
+            <th>Fecha límite</th>
+            <th>Vigencia</th>
             <th>Estado</th>
             <th>Acción</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Instalación de andamios</td>
-            <td>Montaje</td>
-            <td>01/07/2025</td>
-            <td>05/07/2025</td>
-            <td>4 días</td>
-            <td><span class="badge badge--positive">Completada</span></td>
-            <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Ver detalle</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Editar actividad</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Marcar como completada</div><div class="dropdown-item dropdown-item--danger"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>Eliminar actividad</div></div></div></td>
-          </tr>
-          <tr>
-            <td>Colada hormigón fundaciones</td>
-            <td>Estructura</td>
-            <td>07/07/2025</td>
-            <td>10/07/2025</td>
-            <td>3 días</td>
-            <td><span class="badge badge--positive">Completada</span></td>
-            <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Ver detalle</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Editar actividad</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Marcar como completada</div><div class="dropdown-item dropdown-item--danger"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>Eliminar actividad</div></div></div></td>
-          </tr>
-          <tr>
-            <td>Montaje estructura metálica</td>
-            <td>Estructura</td>
-            <td>12/07/2025</td>
-            <td>22/07/2025</td>
-            <td>10 días</td>
-            <td><span class="badge badge--process">En progreso</span></td>
-            <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Ver detalle</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Editar actividad</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Marcar como completada</div><div class="dropdown-item dropdown-item--danger"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>Eliminar actividad</div></div></div></td>
-          </tr>
-          <tr>
-            <td>Instalación eléctrica piso 1</td>
-            <td>Instalaciones</td>
-            <td>15/07/2025</td>
-            <td>25/07/2025</td>
-            <td>10 días</td>
-            <td><span class="badge badge--process">En progreso</span></td>
-            <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Ver detalle</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Editar actividad</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Marcar como completada</div><div class="dropdown-item dropdown-item--danger"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>Eliminar actividad</div></div></div></td>
-          </tr>
-          <tr>
-            <td>Impermeabilización cubierta</td>
-            <td>Terminaciones</td>
-            <td>20/07/2025</td>
-            <td>23/07/2025</td>
-            <td>3 días</td>
-            <td><span class="badge badge--neutral">Pendiente</span></td>
-            <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Ver detalle</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Editar actividad</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Marcar como completada</div><div class="dropdown-item dropdown-item--danger"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>Eliminar actividad</div></div></div></td>
-          </tr>
-          <tr>
-            <td>Pintura interior oficinas</td>
-            <td>Terminaciones</td>
-            <td>25/07/2025</td>
-            <td>01/08/2025</td>
-            <td>7 días</td>
-            <td><span class="badge badge--neutral">Pendiente</span></td>
-            <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Ver detalle</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Editar actividad</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Marcar como completada</div><div class="dropdown-item dropdown-item--danger"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>Eliminar actividad</div></div></div></td>
-          </tr>
-          <tr>
-            <td>Prueba instalaciones sanitarias</td>
-            <td>Instalaciones</td>
-            <td>28/07/2025</td>
-            <td>29/07/2025</td>
+            <td>Examen Drogas</td>
+            <td>Reclutamiento</td>
+            <td>20-01-2025</td>
             <td>1 día</td>
-            <td><span class="badge badge--negative">Bloqueada</span></td>
+            <td>20-01-2026</td>
+            <td><span class="badge badge--positive">Vigente</span></td>
+            <td><span class="badge badge--positive">Aprobado</span></td>
             <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Ver detalle</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Editar actividad</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Marcar como completada</div><div class="dropdown-item dropdown-item--danger"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>Eliminar actividad</div></div></div></td>
           </tr>
           <tr>
-            <td>Revisión de planos estructurales</td>
-            <td>Revisión</td>
-            <td>30/07/2025</td>
-            <td>31/07/2025</td>
+            <td>Examen Altura</td>
+            <td>Reclutamiento</td>
+            <td>20-01-2025</td>
+            <td>2 días</td>
+            <td>20-01-2026</td>
+            <td><span class="badge badge--positive">Vigente</span></td>
+            <td><span class="badge badge--yellow">En proceso</span></td>
+            <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Ver detalle</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Editar actividad</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Marcar como completada</div><div class="dropdown-item dropdown-item--danger"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>Eliminar actividad</div></div></div></td>
+          </tr>
+          <tr>
+            <td>Contrato Firmado</td>
+            <td>Contratación</td>
+            <td>22-01-2025</td>
             <td>1 día</td>
-            <td><span class="badge badge--neutral">Pendiente</span></td>
+            <td>22-01-2026</td>
+            <td><span class="badge badge--positive">Vigente</span></td>
+            <td><span class="badge badge--positive">Aprobado</span></td>
+            <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Ver detalle</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Editar actividad</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Marcar como completada</div><div class="dropdown-item dropdown-item--danger"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>Eliminar actividad</div></div></div></td>
+          </tr>
+          <tr>
+            <td>Inducción Faena</td>
+            <td>Onboarding</td>
+            <td>25-01-2025</td>
+            <td>3 días</td>
+            <td>25-01-2026</td>
+            <td><span class="badge badge--neutral">Por vencer</span></td>
+            <td><span class="badge badge--negative">Rechazado</span></td>
+            <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Ver detalle</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Editar actividad</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Marcar como completada</div><div class="dropdown-item dropdown-item--danger"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>Eliminar actividad</div></div></div></td>
+          </tr>
+          <tr>
+            <td>Capacitación EPP</td>
+            <td>Onboarding</td>
+            <td>28-01-2025</td>
+            <td>2 días</td>
+            <td>28-01-2026</td>
+            <td><span class="badge badge--positive">Vigente</span></td>
+            <td><span class="badge badge--yellow">En proceso</span></td>
+            <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Ver detalle</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Editar actividad</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Marcar como completada</div><div class="dropdown-item dropdown-item--danger"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>Eliminar actividad</div></div></div></td>
+          </tr>
+          <tr>
+            <td>Evaluación desempeño</td>
+            <td>Seguimiento</td>
+            <td>15-03-2025</td>
+            <td>1 día</td>
+            <td>15-03-2026</td>
+            <td><span class="badge badge--positive">Vigente</span></td>
+            <td><span class="badge badge--positive">Aprobado</span></td>
             <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Ver detalle</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Editar actividad</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Marcar como completada</div><div class="dropdown-item dropdown-item--danger"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>Eliminar actividad</div></div></div></td>
           </tr>
         </tbody>
@@ -621,15 +566,15 @@ tbody tr:nth-child(even) td { background: white; }
 <script>
   // Toggle persona: variante 1 (colapsado) ↔ variante 2 (expandido)
   function togglePersonData() {
-    var details = document.getElementById('personDetails');
+    var navbar  = document.querySelector('.persona-navbar');
     var btn     = document.getElementById('toggleBtn');
-    var isOpen  = details.classList.contains('open');
+    var isOpen  = navbar.classList.contains('expanded');
     if (isOpen) {
-      details.classList.remove('open');
+      navbar.classList.remove('expanded');
       btn.classList.remove('open');
       btn.firstChild.textContent = 'Ver datos generales';
     } else {
-      details.classList.add('open');
+      navbar.classList.add('expanded');
       btn.classList.add('open');
       btn.firstChild.textContent = 'Ocultar datos generales';
     }
