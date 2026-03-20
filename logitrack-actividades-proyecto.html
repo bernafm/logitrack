@@ -119,58 +119,98 @@ body {
 }
 .page-title-icon svg { color: var(--red); }
 
-/* ── PERSON HEADER – COLLAPSED ───────────────── */
-.person-header {
+/* ── PERSONA NAVBAR ──────────────────────────── */
+.persona-navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  background: var(--gray-50);
-  border: 1px solid var(--gray-200);
-  border-radius: 12px;
-  padding: 14px 20px;
-  transition: border-radius .2s;
+  gap: 24px;
+  min-height: 142px;
 }
-.person-header.expanded {
-  border-radius: 12px 12px 0 0;
-  border-bottom: none;
-}
-.person-header__left {
+.persona-navbar__left {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 24px;
+  flex: 1;
 }
-.person-avatar {
-  width: 40px; height: 40px; border-radius: 100px;
-  background: var(--blue);
-  display: flex; align-items: center; justify-content: center;
+.persona-photo {
+  width: 142px;
+  height: 142px;
+  background: #D9D9D9;
+  border-radius: 8px;
   flex-shrink: 0;
 }
-.person-summary { display: flex; flex-direction: column; gap: 2px; }
-.person-name { font-size: 16px; font-weight: 700; color: var(--blue); }
-.person-meta { font-size: 13px; color: var(--gray-500); }
-.badge {
-  display: inline-flex; align-items: center;
-  padding: 4px 12px; border-radius: 100px;
-  font-size: 13px; border: 1px solid;
+.persona-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
-.badge--positive { background: var(--green-bg); border-color: var(--green); color: var(--green); }
-.badge--process  { background: var(--yellow-bg); border-color: var(--yellow); color: var(--yellow); }
-.badge--negative { background: var(--red-bg); border-color: var(--red-light); color: var(--red-light); }
-.badge--neutral  { background: var(--blue-bg); border-color: var(--blue-mid); color: var(--blue); }
-
-.btn-toggle {
-  display: inline-flex; align-items: center; gap: 6px;
-  padding: 8px 14px; height: 36px;
-  border: 1px solid var(--blue); border-radius: 8px;
-  background: white; color: var(--blue);
-  font-family: inherit; font-size: 13px; font-weight: 600;
-  cursor: pointer; white-space: nowrap; flex-shrink: 0;
-  transition: background .15s;
+.persona-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--blue);
 }
-.btn-toggle:hover { background: var(--blue-bg); }
-.btn-toggle svg { transition: transform .2s; }
-.btn-toggle.open svg { transform: rotate(180deg); }
+.persona-role {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--blue);
+}
+.persona-data-grid {
+  display: flex;
+  gap: 24px;
+  margin-top: 4px;
+}
+.persona-data-labels {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.persona-data-values {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.persona-data-label {
+  font-size: 16px;
+  color: var(--gray-500);
+  line-height: 1.4;
+}
+.persona-data-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gray-500);
+  line-height: 1.4;
+}
+.persona-navbar__right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.persona-actions {
+  display: flex;
+  gap: 12px;
+}
+.btn-action {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 8px 12px; height: 37px;
+  background: white; border-radius: 8px;
+  font-family: inherit; font-size: 14px;
+  cursor: pointer; white-space: nowrap;
+}
+.btn-action--blue  { border: 1px solid var(--blue); color: var(--blue); }
+.btn-action--pink  { border: 1px solid var(--red-light); color: var(--red-light); }
+.btn-action--blue:hover { background: var(--blue-bg); }
+.btn-action--pink:hover { background: var(--red-bg); }
+.ver-datos-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 14px; color: var(--blue);
+  background: none; border: none; font-family: inherit;
+  cursor: pointer; padding: 0;
+}
+.ver-datos-link svg { transition: transform .2s; }
+.ver-datos-link.open svg { transform: rotate(90deg); }
 
 /* ── PERSON DETAILS – EXPANDED ───────────────── */
 .person-details {
@@ -351,22 +391,39 @@ tbody tr:nth-child(even) td { background: white; }
       <h1 class="page-title">Actividades del proyecto</h1>
     </div>
 
-    <!-- PERSON HEADER – COLLAPSED (Variante 1) -->
-    <div class="person-header" id="personHeader">
-      <div class="person-header__left">
-        <div class="person-avatar">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <!-- PERSONA NAVBAR (slot persona_navbar) -->
+    <div class="persona-navbar">
+      <div class="persona-navbar__left">
+        <!-- Foto placeholder -->
+        <div class="persona-photo"></div>
+        <!-- Info -->
+        <div class="persona-info">
+          <div class="persona-name">Nombre Persona</div>
+          <div class="persona-role">Cargo postulante</div>
+          <div class="persona-data-grid">
+            <div class="persona-data-labels">
+              <span class="persona-data-label">RUT:</span>
+              <span class="persona-data-label">Edad:</span>
+              <span class="persona-data-label">Experiencia:</span>
+            </div>
+            <div class="persona-data-values">
+              <span class="persona-data-value">17.616.256-5</span>
+              <span class="persona-data-value">35 años</span>
+              <span class="persona-data-value">5 años</span>
+            </div>
+          </div>
         </div>
-        <div class="person-summary">
-          <div class="person-name">Silvio Traverso</div>
-          <div class="person-meta">Cargo · RUT: 0.000.000-0</div>
-        </div>
-        <span class="badge badge--positive">Aprobada</span>
       </div>
-      <button class="btn-toggle" id="toggleBtn" onclick="togglePersonData()">
-        Ver datos generales
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1F4085" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
+      <div class="persona-navbar__right">
+        <div class="persona-actions">
+          <button class="btn-action btn-action--blue">Contactar</button>
+          <button class="btn-action btn-action--pink">Archivar Persona</button>
+        </div>
+        <button class="ver-datos-link" id="toggleBtn" onclick="togglePersonData()">
+          Ver datos generales
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#EF4F3E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
     </div>
 
     <!-- PERSON DETAILS – EXPANDED (Variante 2) -->
@@ -564,20 +621,17 @@ tbody tr:nth-child(even) td { background: white; }
 <script>
   // Toggle persona: variante 1 (colapsado) ↔ variante 2 (expandido)
   function togglePersonData() {
-    var header  = document.getElementById('personHeader');
     var details = document.getElementById('personDetails');
     var btn     = document.getElementById('toggleBtn');
     var isOpen  = details.classList.contains('open');
     if (isOpen) {
       details.classList.remove('open');
-      header.classList.remove('expanded');
       btn.classList.remove('open');
-      btn.childNodes[0].textContent = 'Ver datos generales';
+      btn.firstChild.textContent = 'Ver datos generales';
     } else {
       details.classList.add('open');
-      header.classList.add('expanded');
       btn.classList.add('open');
-      btn.childNodes[0].textContent = 'Ocultar datos generales';
+      btn.firstChild.textContent = 'Ocultar datos generales';
     }
   }
 
