@@ -471,184 +471,283 @@ tbody tr:nth-child(even) td { background: white; }
 
       <!-- TABS -->
       <div class="tabs-row">
-        <div class="tab tab--active">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1F4085" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <div class="tab tab--active" data-tab="personas">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           Personas
           <div class="tab-x"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#D3D3D3" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
         </div>
         <div class="tab-sep"></div>
-        <div class="tab tab--inactive">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        <div class="tab tab--inactive" data-tab="insumos">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
           Insumos
           <div class="tab-x"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#D3D3D3" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
         </div>
         <div class="tab-sep"></div>
-        <div class="tab tab--inactive">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        <div class="tab tab--inactive" data-tab="equipos">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
           Equipos
           <div class="tab-x"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#D3D3D3" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
         </div>
         <div class="tab-sep"></div>
-        <div class="tab tab--inactive">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+        <div class="tab tab--inactive" data-tab="documentos">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
           Documentos
           <div class="tab-x"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#D3D3D3" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
         </div>
       </div>
 
-      <!-- TOOLBAR -->
-      <div class="toolbar">
-        <div class="toolbar-filters">
-          <div class="input-group">
-            <label class="input-label">Buscar por nombre</label>
-            <div class="input-field">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-              <input type="text" placeholder="Buscar...">
+      <!-- ── TAB: PERSONAS ───────────────────────────────── -->
+      <div id="tab-personas" class="tab-panel">
+        <div class="toolbar">
+          <div class="toolbar-filters">
+            <div class="input-group">
+              <label class="input-label">Buscar por nombre</label>
+              <div class="input-field">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" placeholder="Buscar...">
+              </div>
+            </div>
+            <div class="input-group">
+              <label class="input-label">Buscar por cargo</label>
+              <div class="input-field">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" placeholder="Buscar...">
+              </div>
+            </div>
+            <div class="input-group">
+              <label class="input-label">Estado</label>
+              <div class="input-field">
+                <input type="text" placeholder="Todos" style="flex:1;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
             </div>
           </div>
-          <div class="input-group">
-            <label class="input-label">Buscar por cargo</label>
-            <div class="input-field">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-              <input type="text" placeholder="Buscar...">
-            </div>
-          </div>
-          <div class="input-group">
-            <label class="input-label">Estado</label>
-            <div class="input-field">
-              <input type="text" placeholder="Todos" style="flex:1;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-            </div>
+          <div class="toolbar-row">
+            <span class="results-count">Personas asignadas: 20</span>
+            <button class="btn btn--lg btn--primary">Agregar persona</button>
           </div>
         </div>
-        <div class="toolbar-row">
-          <span class="results-count">Personas asignadas: 20</span>
-          <button class="btn btn--lg btn--primary">Agregar persona</button>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Nombre</th><th>Rol</th><th>RUT</th><th>Fecha ingreso</th><th>Fecha egreso</th><th>Estado</th><th>Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Silvio Traverso</td><td>Cargo</td><td>0.000.000-0</td><td>17/07/2025</td><td>17/07/2026</td><td><span class="badge badge--positive">Aprobada</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver contrato</div><div class="dropdown-item">Ver Actividades</div><div class="dropdown-item">Carpeta Digital</div><div class="dropdown-item">Ver CV</div><div class="dropdown-item dropdown-item--danger">Archivar persona</div></div></div></td></tr>
+              <tr><td>Silvio Traverso</td><td>Cargo</td><td>0.000.000-0</td><td>17/07/2025</td><td>17/07/2026</td><td><span class="badge badge--process">En proceso</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver contrato</div><div class="dropdown-item">Ver Actividades</div><div class="dropdown-item">Carpeta Digital</div><div class="dropdown-item">Ver CV</div><div class="dropdown-item dropdown-item--danger">Archivar persona</div></div></div></td></tr>
+              <tr><td>Silvio Traverso</td><td>Cargo</td><td>0.000.000-0</td><td>17/07/2025</td><td>17/07/2026</td><td><span class="badge badge--positive">Aprobada</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver contrato</div><div class="dropdown-item">Ver Actividades</div><div class="dropdown-item">Carpeta Digital</div><div class="dropdown-item">Ver CV</div><div class="dropdown-item dropdown-item--danger">Archivar persona</div></div></div></td></tr>
+              <tr><td>Silvio Traverso</td><td>Cargo</td><td>0.000.000-0</td><td>17/07/2025</td><td>17/07/2026</td><td><span class="badge badge--negative">Rechazado</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver contrato</div><div class="dropdown-item">Ver Actividades</div><div class="dropdown-item">Carpeta Digital</div><div class="dropdown-item">Ver CV</div><div class="dropdown-item dropdown-item--danger">Archivar persona</div></div></div></td></tr>
+              <tr><td>Silvio Traverso</td><td>Cargo</td><td>0.000.000-0</td><td>17/07/2025</td><td>17/07/2026</td><td><span class="badge badge--process">En proceso</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver contrato</div><div class="dropdown-item">Ver Actividades</div><div class="dropdown-item">Carpeta Digital</div><div class="dropdown-item">Ver CV</div><div class="dropdown-item dropdown-item--danger">Archivar persona</div></div></div></td></tr>
+              <tr><td>Silvio Traverso</td><td>Cargo</td><td>0.000.000-0</td><td>17/07/2025</td><td>17/07/2026</td><td><span class="badge badge--positive">Aprobada</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver contrato</div><div class="dropdown-item">Ver Actividades</div><div class="dropdown-item">Carpeta Digital</div><div class="dropdown-item">Ver CV</div><div class="dropdown-item dropdown-item--danger">Archivar persona</div></div></div></td></tr>
+              <tr><td>Silvio Traverso</td><td>Cargo</td><td>0.000.000-0</td><td>17/07/2025</td><td>17/07/2026</td><td><span class="badge badge--neutral">Contratado</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver contrato</div><div class="dropdown-item">Ver Actividades</div><div class="dropdown-item">Carpeta Digital</div><div class="dropdown-item">Ver CV</div><div class="dropdown-item dropdown-item--danger">Archivar persona</div></div></div></td></tr>
+              <tr><td>Silvio Traverso</td><td>Cargo</td><td>0.000.000-0</td><td>17/07/2025</td><td>17/07/2026</td><td><span class="badge badge--positive">Aprobada</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver contrato</div><div class="dropdown-item">Ver Actividades</div><div class="dropdown-item">Carpeta Digital</div><div class="dropdown-item">Ver CV</div><div class="dropdown-item dropdown-item--danger">Archivar persona</div></div></div></td></tr>
+              <tr><td>Silvio Traverso</td><td>Cargo</td><td>0.000.000-0</td><td>17/07/2025</td><td>17/07/2026</td><td><span class="badge badge--process">En proceso</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver contrato</div><div class="dropdown-item">Ver Actividades</div><div class="dropdown-item">Carpeta Digital</div><div class="dropdown-item">Ver CV</div><div class="dropdown-item dropdown-item--danger">Archivar persona</div></div></div></td></tr>
+            </tbody>
+          </table>
+          <div class="table-footer">
+            <div class="table-footer-left">
+              <span>Rows per page:</span>
+              <select class="table-footer-select"><option>10</option><option>20</option><option>50</option></select>
+              <span>1 - 10 of 20</span>
+            </div>
+            <div class="table-footer-arrows">
+              <button class="table-footer-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
+              <button class="table-footer-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- TABLE -->
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Rol</th>
-              <th>RUT</th>
-              <th>Fecha ingreso</th>
-              <th>Fecha egreso</th>
-              <th>Estado</th>
-              <th>Acción</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Silvio Traverso</td>
-              <td>Cargo</td>
-              <td>0.000.000-0</td>
-              <td>17/07/2025</td>
-              <td>17/07/2026</td>
-              <td><span class="badge badge--positive">Aprobada</span></td>
-              <td>
-                <div class="action-wrap">
-                  <button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button>
-                  <div class="dropdown-menu">
-                    <div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Ver contrato</div>
-                    <div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/></svg>Ver Actividades</div>
-                    <div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>Carpeta Digital</div>
-                    <div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Ver CV</div>
-                    <div class="dropdown-item dropdown-item--danger"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/></svg>Archivar persona</div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>Silvio Traverso</td>
-              <td>Cargo</td>
-              <td>0.000.000-0</td>
-              <td>17/07/2025</td>
-              <td>17/07/2026</td>
-              <td><span class="badge badge--process">En proceso</span></td>
-              <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Ver contrato</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/></svg>Ver Actividades</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>Carpeta Digital</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Ver CV</div><div class="dropdown-item dropdown-item--danger">Archivar persona</div></div></div></td>
-            </tr>
-            <tr>
-              <td>Silvio Traverso</td>
-              <td>Cargo</td>
-              <td>0.000.000-0</td>
-              <td>17/07/2025</td>
-              <td>17/07/2026</td>
-              <td><span class="badge badge--positive">Aprobada</span></td>
-              <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver contrato</div><div class="dropdown-item">Ver Actividades</div><div class="dropdown-item">Carpeta Digital</div><div class="dropdown-item">Ver CV</div><div class="dropdown-item dropdown-item--danger">Archivar persona</div></div></div></td>
-            </tr>
-            <tr>
-              <td>Silvio Traverso</td>
-              <td>Cargo</td>
-              <td>0.000.000-0</td>
-              <td>17/07/2025</td>
-              <td>17/07/2026</td>
-              <td><span class="badge badge--negative">Rechazado</span></td>
-              <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver contrato</div><div class="dropdown-item">Ver Actividades</div><div class="dropdown-item">Carpeta Digital</div><div class="dropdown-item">Ver CV</div><div class="dropdown-item dropdown-item--danger">Archivar persona</div></div></div></td>
-            </tr>
-            <tr>
-              <td>Silvio Traverso</td>
-              <td>Cargo</td>
-              <td>0.000.000-0</td>
-              <td>17/07/2025</td>
-              <td>17/07/2026</td>
-              <td><span class="badge badge--process">En proceso</span></td>
-              <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver contrato</div><div class="dropdown-item">Ver Actividades</div><div class="dropdown-item">Carpeta Digital</div><div class="dropdown-item">Ver CV</div><div class="dropdown-item dropdown-item--danger">Archivar persona</div></div></div></td>
-            </tr>
-            <tr>
-              <td>Silvio Traverso</td>
-              <td>Cargo</td>
-              <td>0.000.000-0</td>
-              <td>17/07/2025</td>
-              <td>17/07/2026</td>
-              <td><span class="badge badge--positive">Aprobada</span></td>
-              <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver contrato</div><div class="dropdown-item">Ver Actividades</div><div class="dropdown-item">Carpeta Digital</div><div class="dropdown-item">Ver CV</div><div class="dropdown-item dropdown-item--danger">Archivar persona</div></div></div></td>
-            </tr>
-            <tr>
-              <td>Silvio Traverso</td>
-              <td>Cargo</td>
-              <td>0.000.000-0</td>
-              <td>17/07/2025</td>
-              <td>17/07/2026</td>
-              <td><span class="badge badge--neutral">Contratado</span></td>
-              <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver contrato</div><div class="dropdown-item">Ver Actividades</div><div class="dropdown-item">Carpeta Digital</div><div class="dropdown-item">Ver CV</div><div class="dropdown-item dropdown-item--danger">Archivar persona</div></div></div></td>
-            </tr>
-            <tr>
-              <td>Silvio Traverso</td>
-              <td>Cargo</td>
-              <td>0.000.000-0</td>
-              <td>17/07/2025</td>
-              <td>17/07/2026</td>
-              <td><span class="badge badge--positive">Aprobada</span></td>
-              <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver contrato</div><div class="dropdown-item">Ver Actividades</div><div class="dropdown-item">Carpeta Digital</div><div class="dropdown-item">Ver CV</div><div class="dropdown-item dropdown-item--danger">Archivar persona</div></div></div></td>
-            </tr>
-            <tr>
-              <td>Silvio Traverso</td>
-              <td>Cargo</td>
-              <td>0.000.000-0</td>
-              <td>17/07/2025</td>
-              <td>17/07/2026</td>
-              <td><span class="badge badge--process">En proceso</span></td>
-              <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver contrato</div><div class="dropdown-item">Ver Actividades</div><div class="dropdown-item">Carpeta Digital</div><div class="dropdown-item">Ver CV</div><div class="dropdown-item dropdown-item--danger">Archivar persona</div></div></div></td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="table-footer">
-          <div class="table-footer-left">
-            <span>Rows per page:</span>
-            <select class="table-footer-select"><option>10</option><option>20</option><option>50</option></select>
-            <span>1 - 10 of 20</span>
+      <!-- ── TAB: INSUMOS ────────────────────────────────── -->
+      <div id="tab-insumos" class="tab-panel" style="display:none;">
+        <div class="toolbar">
+          <div class="toolbar-filters">
+            <div class="input-group">
+              <label class="input-label">Buscar por nombre</label>
+              <div class="input-field">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" placeholder="Buscar...">
+              </div>
+            </div>
+            <div class="input-group">
+              <label class="input-label">Buscar por categoría</label>
+              <div class="input-field">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" placeholder="Buscar...">
+              </div>
+            </div>
+            <div class="input-group">
+              <label class="input-label">Estado</label>
+              <div class="input-field">
+                <input type="text" placeholder="Todos" style="flex:1;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+            </div>
           </div>
-          <div class="table-footer-arrows">
-            <button class="table-footer-btn">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-            </button>
-            <button class="table-footer-btn">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-            </button>
+          <div class="toolbar-row">
+            <span class="results-count">Insumos registrados: 20</span>
+            <button class="btn btn--lg btn--primary">Agregar insumo</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Nombre</th><th>Categoría</th><th>Cantidad</th><th>Unidad</th><th>Fecha solicitud</th><th>Fecha entrega</th><th>Estado</th><th>Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Cemento Portland</td><td>Materiales</td><td>500</td><td>sacos</td><td>17/07/2025</td><td>20/07/2025</td><td><span class="badge badge--positive">Disponible</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver detalle</div><div class="dropdown-item">Editar insumo</div><div class="dropdown-item dropdown-item--danger">Eliminar insumo</div></div></div></td></tr>
+              <tr><td>Fierro 12mm</td><td>Estructura</td><td>200</td><td>barras</td><td>17/07/2025</td><td>22/07/2025</td><td><span class="badge badge--process">En tránsito</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver detalle</div><div class="dropdown-item">Editar insumo</div><div class="dropdown-item dropdown-item--danger">Eliminar insumo</div></div></div></td></tr>
+              <tr><td>Arena lavada</td><td>Materiales</td><td>30</td><td>m³</td><td>18/07/2025</td><td>18/07/2025</td><td><span class="badge badge--positive">Disponible</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver detalle</div><div class="dropdown-item">Editar insumo</div><div class="dropdown-item dropdown-item--danger">Eliminar insumo</div></div></div></td></tr>
+              <tr><td>Pintura látex blanco</td><td>Terminaciones</td><td>80</td><td>litros</td><td>19/07/2025</td><td>24/07/2025</td><td><span class="badge badge--negative">Agotado</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver detalle</div><div class="dropdown-item">Editar insumo</div><div class="dropdown-item dropdown-item--danger">Eliminar insumo</div></div></div></td></tr>
+              <tr><td>Ladrillos huecos</td><td>Albañilería</td><td>1200</td><td>unidades</td><td>20/07/2025</td><td>25/07/2025</td><td><span class="badge badge--process">En tránsito</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver detalle</div><div class="dropdown-item">Editar insumo</div><div class="dropdown-item dropdown-item--danger">Eliminar insumo</div></div></div></td></tr>
+              <tr><td>Cable eléctrico 4mm</td><td>Instalaciones</td><td>400</td><td>metros</td><td>21/07/2025</td><td>26/07/2025</td><td><span class="badge badge--positive">Disponible</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver detalle</div><div class="dropdown-item">Editar insumo</div><div class="dropdown-item dropdown-item--danger">Eliminar insumo</div></div></div></td></tr>
+              <tr><td>Tubería PVC 110mm</td><td>Sanitario</td><td>60</td><td>metros</td><td>22/07/2025</td><td>27/07/2025</td><td><span class="badge badge--neutral">Solicitado</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver detalle</div><div class="dropdown-item">Editar insumo</div><div class="dropdown-item dropdown-item--danger">Eliminar insumo</div></div></div></td></tr>
+              <tr><td>Malla sombra 80%</td><td>Seguridad</td><td>5</td><td>rollos</td><td>23/07/2025</td><td>28/07/2025</td><td><span class="badge badge--positive">Disponible</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver detalle</div><div class="dropdown-item">Editar insumo</div><div class="dropdown-item dropdown-item--danger">Eliminar insumo</div></div></div></td></tr>
+              <tr><td>Hormigón premezclado</td><td>Estructura</td><td>15</td><td>m³</td><td>24/07/2025</td><td>24/07/2025</td><td><span class="badge badge--process">En tránsito</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver detalle</div><div class="dropdown-item">Editar insumo</div><div class="dropdown-item dropdown-item--danger">Eliminar insumo</div></div></div></td></tr>
+            </tbody>
+          </table>
+          <div class="table-footer">
+            <div class="table-footer-left">
+              <span>Rows per page:</span>
+              <select class="table-footer-select"><option>10</option><option>20</option><option>50</option></select>
+              <span>1 - 10 of 20</span>
+            </div>
+            <div class="table-footer-arrows">
+              <button class="table-footer-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
+              <button class="table-footer-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── TAB: EQUIPOS ────────────────────────────────── -->
+      <div id="tab-equipos" class="tab-panel" style="display:none;">
+        <div class="toolbar">
+          <div class="toolbar-filters">
+            <div class="input-group">
+              <label class="input-label">Buscar por nombre</label>
+              <div class="input-field">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" placeholder="Buscar...">
+              </div>
+            </div>
+            <div class="input-group">
+              <label class="input-label">Buscar por tipo</label>
+              <div class="input-field">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" placeholder="Buscar...">
+              </div>
+            </div>
+            <div class="input-group">
+              <label class="input-label">Estado</label>
+              <div class="input-field">
+                <input type="text" placeholder="Todos" style="flex:1;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="toolbar-row">
+            <span class="results-count">Equipos asignados: 20</span>
+            <button class="btn btn--lg btn--primary">Agregar equipo</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Nombre</th><th>Tipo</th><th>Patente / ID</th><th>Fecha asignación</th><th>Fecha retiro</th><th>Responsable</th><th>Estado</th><th>Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Grúa torre 40m</td><td>Izaje</td><td>EQ-001</td><td>01/07/2025</td><td>31/12/2025</td><td>Juan Pérez</td><td><span class="badge badge--positive">Operativo</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver detalle</div><div class="dropdown-item">Editar equipo</div><div class="dropdown-item dropdown-item--danger">Retirar equipo</div></div></div></td></tr>
+              <tr><td>Mixer hormigón</td><td>Transporte</td><td>ABCD-12</td><td>05/07/2025</td><td>30/11/2025</td><td>Luis Rojas</td><td><span class="badge badge--process">En mantención</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver detalle</div><div class="dropdown-item">Editar equipo</div><div class="dropdown-item dropdown-item--danger">Retirar equipo</div></div></div></td></tr>
+              <tr><td>Andamio modular</td><td>Acceso</td><td>EQ-003</td><td>10/07/2025</td><td>28/02/2026</td><td>Pedro Soto</td><td><span class="badge badge--positive">Operativo</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver detalle</div><div class="dropdown-item">Editar equipo</div><div class="dropdown-item dropdown-item--danger">Retirar equipo</div></div></div></td></tr>
+              <tr><td>Excavadora CAT 320</td><td>Movimiento de tierra</td><td>WXYZ-34</td><td>12/07/2025</td><td>15/10/2025</td><td>Carlos Jara</td><td><span class="badge badge--negative">Fuera de servicio</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver detalle</div><div class="dropdown-item">Editar equipo</div><div class="dropdown-item dropdown-item--danger">Retirar equipo</div></div></div></td></tr>
+              <tr><td>Compresor 200L</td><td>Neumático</td><td>EQ-005</td><td>15/07/2025</td><td>15/01/2026</td><td>Mario Silva</td><td><span class="badge badge--positive">Operativo</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver detalle</div><div class="dropdown-item">Editar equipo</div><div class="dropdown-item dropdown-item--danger">Retirar equipo</div></div></div></td></tr>
+              <tr><td>Vibrador hormigón</td><td>Herramienta</td><td>EQ-006</td><td>17/07/2025</td><td>17/12/2025</td><td>Pedro Soto</td><td><span class="badge badge--neutral">Reservado</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver detalle</div><div class="dropdown-item">Editar equipo</div><div class="dropdown-item dropdown-item--danger">Retirar equipo</div></div></div></td></tr>
+              <tr><td>Sierra circular</td><td>Herramienta</td><td>EQ-007</td><td>20/07/2025</td><td>20/12/2025</td><td>Luis Rojas</td><td><span class="badge badge--positive">Operativo</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver detalle</div><div class="dropdown-item">Editar equipo</div><div class="dropdown-item dropdown-item--danger">Retirar equipo</div></div></div></td></tr>
+              <tr><td>Elevador personal</td><td>Izaje</td><td>EQ-008</td><td>22/07/2025</td><td>22/03/2026</td><td>Juan Pérez</td><td><span class="badge badge--process">En mantención</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver detalle</div><div class="dropdown-item">Editar equipo</div><div class="dropdown-item dropdown-item--danger">Retirar equipo</div></div></div></td></tr>
+              <tr><td>Generador 50kVA</td><td>Eléctrico</td><td>EQ-009</td><td>25/07/2025</td><td>25/06/2026</td><td>Mario Silva</td><td><span class="badge badge--positive">Operativo</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Ver detalle</div><div class="dropdown-item">Editar equipo</div><div class="dropdown-item dropdown-item--danger">Retirar equipo</div></div></div></td></tr>
+            </tbody>
+          </table>
+          <div class="table-footer">
+            <div class="table-footer-left">
+              <span>Rows per page:</span>
+              <select class="table-footer-select"><option>10</option><option>20</option><option>50</option></select>
+              <span>1 - 10 of 20</span>
+            </div>
+            <div class="table-footer-arrows">
+              <button class="table-footer-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
+              <button class="table-footer-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── TAB: DOCUMENTOS ─────────────────────────────── -->
+      <div id="tab-documentos" class="tab-panel" style="display:none;">
+        <div class="toolbar">
+          <div class="toolbar-filters">
+            <div class="input-group">
+              <label class="input-label">Buscar por nombre</label>
+              <div class="input-field">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" placeholder="Buscar...">
+              </div>
+            </div>
+            <div class="input-group">
+              <label class="input-label">Buscar por tipo</label>
+              <div class="input-field">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" placeholder="Buscar...">
+              </div>
+            </div>
+            <div class="input-group">
+              <label class="input-label">Estado</label>
+              <div class="input-field">
+                <input type="text" placeholder="Todos" style="flex:1;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="toolbar-row">
+            <span class="results-count">Documentos registrados: 20</span>
+            <button class="btn btn--lg btn--primary">Agregar documento</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Nombre</th><th>Tipo</th><th>Fecha creación</th><th>Creado por</th><th>Versión</th><th>Estado</th><th>Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Planos arquitectónicos</td><td>Plano</td><td>01/07/2025</td><td>Carlos Jara</td><td>v2.1</td><td><span class="badge badge--positive">Aprobado</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Descargar</div><div class="dropdown-item">Ver historial</div><div class="dropdown-item">Subir nueva versión</div><div class="dropdown-item dropdown-item--danger">Eliminar documento</div></div></div></td></tr>
+              <tr><td>Contrato principal</td><td>Contrato</td><td>15/06/2025</td><td>Admin</td><td>v1.0</td><td><span class="badge badge--positive">Aprobado</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Descargar</div><div class="dropdown-item">Ver historial</div><div class="dropdown-item">Subir nueva versión</div><div class="dropdown-item dropdown-item--danger">Eliminar documento</div></div></div></td></tr>
+              <tr><td>Plan de seguridad</td><td>Procedimiento</td><td>20/06/2025</td><td>Juan Pérez</td><td>v1.2</td><td><span class="badge badge--process">En revisión</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Descargar</div><div class="dropdown-item">Ver historial</div><div class="dropdown-item">Subir nueva versión</div><div class="dropdown-item dropdown-item--danger">Eliminar documento</div></div></div></td></tr>
+              <tr><td>Presupuesto base</td><td>Financiero</td><td>25/06/2025</td><td>Admin</td><td>v3.0</td><td><span class="badge badge--positive">Aprobado</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Descargar</div><div class="dropdown-item">Ver historial</div><div class="dropdown-item">Subir nueva versión</div><div class="dropdown-item dropdown-item--danger">Eliminar documento</div></div></div></td></tr>
+              <tr><td>Permiso de edificación</td><td>Legal</td><td>10/06/2025</td><td>Admin</td><td>v1.0</td><td><span class="badge badge--positive">Aprobado</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Descargar</div><div class="dropdown-item">Ver historial</div><div class="dropdown-item">Subir nueva versión</div><div class="dropdown-item dropdown-item--danger">Eliminar documento</div></div></div></td></tr>
+              <tr><td>Especificaciones técnicas</td><td>Plano</td><td>05/07/2025</td><td>Carlos Jara</td><td>v1.5</td><td><span class="badge badge--negative">Rechazado</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Descargar</div><div class="dropdown-item">Ver historial</div><div class="dropdown-item">Subir nueva versión</div><div class="dropdown-item dropdown-item--danger">Eliminar documento</div></div></div></td></tr>
+              <tr><td>Acta de inicio</td><td>Acta</td><td>01/06/2025</td><td>Admin</td><td>v1.0</td><td><span class="badge badge--positive">Aprobado</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Descargar</div><div class="dropdown-item">Ver historial</div><div class="dropdown-item">Subir nueva versión</div><div class="dropdown-item dropdown-item--danger">Eliminar documento</div></div></div></td></tr>
+              <tr><td>Cronograma Gantt</td><td>Planificación</td><td>08/07/2025</td><td>Juan Pérez</td><td>v2.0</td><td><span class="badge badge--neutral">Borrador</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Descargar</div><div class="dropdown-item">Ver historial</div><div class="dropdown-item">Subir nueva versión</div><div class="dropdown-item dropdown-item--danger">Eliminar documento</div></div></div></td></tr>
+              <tr><td>Informe de avance Jul.</td><td>Informe</td><td>17/07/2025</td><td>Luis Rojas</td><td>v1.0</td><td><span class="badge badge--process">En revisión</span></td><td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item">Descargar</div><div class="dropdown-item">Ver historial</div><div class="dropdown-item">Subir nueva versión</div><div class="dropdown-item dropdown-item--danger">Eliminar documento</div></div></div></td></tr>
+            </tbody>
+          </table>
+          <div class="table-footer">
+            <div class="table-footer-left">
+              <span>Rows per page:</span>
+              <select class="table-footer-select"><option>10</option><option>20</option><option>50</option></select>
+              <span>1 - 10 of 20</span>
+            </div>
+            <div class="table-footer-arrows">
+              <button class="table-footer-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
+              <button class="table-footer-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+            </div>
           </div>
         </div>
       </div>
@@ -774,6 +873,23 @@ tbody tr:nth-child(even) td { background: white; }
 </div>
 
 <script>
+  // Tab switching
+  document.querySelectorAll('.tab[data-tab]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var target = btn.dataset.tab;
+      document.querySelectorAll('.tab[data-tab]').forEach(function(t) {
+        t.classList.remove('tab--active');
+        t.classList.add('tab--inactive');
+        t.querySelector('svg').style.stroke = '#94A3B8';
+      });
+      document.querySelectorAll('.tab-panel').forEach(function(p) { p.style.display = 'none'; });
+      btn.classList.remove('tab--inactive');
+      btn.classList.add('tab--active');
+      btn.querySelector('svg').style.stroke = '#1F4085';
+      document.getElementById('tab-' + target).style.display = 'block';
+    });
+  });
+
   function openPanel() {
     document.getElementById('backdrop').classList.add('open');
     document.getElementById('detailPanel').classList.add('open');
