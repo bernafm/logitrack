@@ -890,6 +890,17 @@ tbody tr:nth-child(even) td { background: white; }
     }
   });
 
+  // Navegar a actividades del proyecto desde dropdown "Ver Actividades"
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.dropdown-item').forEach(function(el) {
+      if (el.textContent.trim() === 'Ver Actividades') {
+        el.addEventListener('click', function() {
+          window.location = 'logitrack-actividades-proyecto.html';
+        });
+      }
+    });
+  });
+
   // Tab switching
   document.querySelectorAll('.tab[data-tab]').forEach(function(btn) {
     btn.addEventListener('click', function() {

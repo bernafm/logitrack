@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LOGITRACK – Actividades del Proyecto</title>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue: #1F4085;
+  --red: #EF4F3E;
+  --white: #FFFFFF;
+  --gray-50: #F8FAFC;
+  --gray-100: #F1F5F9;
+  --gray-200: #E2E8F0;
+  --gray-400: #94A3B8;
+  --gray-500: #64748B;
+  --gray-700: #334155;
+  --green-bg: #ECFDF5;
+  --green: #34D399;
+  --red-bg: #FEE2E2;
+  --red-light: #FB7185;
+  --yellow-bg: #FFFBEC;
+  --yellow: #E5BA2D;
+  --blue-bg: #EFF6FF;
+  --blue-mid: #60A5FA;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Open Sans', sans-serif;
+  background: var(--blue);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ── NAVBAR ─────────────────────────────────── */
+.navbar {
+  height: 72px;
+  background: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  flex-shrink: 0;
+}
+.navbar-logo { display: flex; align-items: center; }
+.navbar-actions { display: flex; align-items: center; gap: 8px; }
+.nav-icon-btn {
+  width: 42px; height: 42px; border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: transparent; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; color: white;
+}
+.nav-avatar {
+  width: 42px; height: 42px; border-radius: 100px;
+  background: white; display: flex; align-items: center; justify-content: center;
+}
+
+/* ── LAYOUT ──────────────────────────────────── */
+.layout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  padding: 24px 24px 24px 0;
+  gap: 24px;
+}
+
+/* ── SIDEBAR ─────────────────────────────────── */
+.sidebar {
+  width: 264px;
+  min-width: 264px;
+  background: var(--blue);
+  display: flex;
+  flex-direction: column;
+  padding: 16px 12px;
+  gap: 4px;
+  overflow-y: auto;
+}
+.sidebar-section { display: flex; flex-direction: column; gap: 2px; }
+.sidebar-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px; border-radius: 8px;
+  cursor: pointer; font-size: 14px; color: white;
+  text-decoration: none; transition: background .15s;
+}
+.sidebar-item:hover { background: rgba(255,255,255,.08); }
+.sidebar-item.active { background: white; color: var(--blue); }
+.sidebar-item.active svg { color: var(--red); }
+.sidebar-item svg { color: rgba(255,255,255,.85); width: 16px; height: 16px; flex-shrink: 0; }
+
+/* ── MAIN CONTENT ────────────────────────────── */
+.main {
+  flex: 1;
+  background: white;
+  border-radius: 16px;
+  padding: 28px 32px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ── PAGE HEADER ─────────────────────────────── */
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.back-btn {
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; flex-shrink: 0; text-decoration: none;
+}
+.page-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--blue);
+}
+.page-title-icon svg { color: var(--red); }
+
+/* ── PERSON HEADER – COLLAPSED ───────────────── */
+.person-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  padding: 14px 20px;
+  transition: border-radius .2s;
+}
+.person-header.expanded {
+  border-radius: 12px 12px 0 0;
+  border-bottom: none;
+}
+.person-header__left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.person-avatar {
+  width: 40px; height: 40px; border-radius: 100px;
+  background: var(--blue);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.person-summary { display: flex; flex-direction: column; gap: 2px; }
+.person-name { font-size: 16px; font-weight: 700; color: var(--blue); }
+.person-meta { font-size: 13px; color: var(--gray-500); }
+.badge {
+  display: inline-flex; align-items: center;
+  padding: 4px 12px; border-radius: 100px;
+  font-size: 13px; border: 1px solid;
+}
+.badge--positive { background: var(--green-bg); border-color: var(--green); color: var(--green); }
+.badge--process  { background: var(--yellow-bg); border-color: var(--yellow); color: var(--yellow); }
+.badge--negative { background: var(--red-bg); border-color: var(--red-light); color: var(--red-light); }
+.badge--neutral  { background: var(--blue-bg); border-color: var(--blue-mid); color: var(--blue); }
+
+.btn-toggle {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 14px; height: 36px;
+  border: 1px solid var(--blue); border-radius: 8px;
+  background: white; color: var(--blue);
+  font-family: inherit; font-size: 13px; font-weight: 600;
+  cursor: pointer; white-space: nowrap; flex-shrink: 0;
+  transition: background .15s;
+}
+.btn-toggle:hover { background: var(--blue-bg); }
+.btn-toggle svg { transition: transform .2s; }
+.btn-toggle.open svg { transform: rotate(180deg); }
+
+/* ── PERSON DETAILS – EXPANDED ───────────────── */
+.person-details {
+  display: none;
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  padding: 20px 20px 24px;
+}
+.person-details.open { display: block; }
+.person-details-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px 32px;
+  margin-bottom: 20px;
+}
+.detail-item { display: flex; flex-direction: column; gap: 3px; }
+.detail-label { font-size: 12px; color: var(--gray-500); text-transform: uppercase; letter-spacing: .4px; }
+.detail-value { font-size: 14px; font-weight: 600; color: var(--gray-700); }
+.person-details__divider { height: 1px; background: var(--gray-200); margin: 16px 0; }
+.person-details__row { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+.detail-contact { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--gray-500); }
+.detail-contact svg { color: var(--red); flex-shrink: 0; }
+
+/* ── TOOLBAR ─────────────────────────────────── */
+.toolbar { display: flex; flex-direction: column; gap: 14px; }
+.toolbar-filters { display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap; }
+.toolbar-row { display: flex; align-items: center; justify-content: space-between; }
+.results-count { font-size: 18px; font-weight: 700; color: var(--blue); }
+.input-group { display: flex; flex-direction: column; gap: 6px; }
+.input-label { font-size: 13px; color: var(--gray-700); font-weight: 600; }
+.input-field {
+  display: flex; align-items: center; gap: 8px;
+  background: white; border: 1px solid var(--gray-200);
+  border-radius: 8px; padding: 0 12px; height: 44px; width: 220px;
+}
+.input-field input {
+  border: none; outline: none; font-family: inherit;
+  font-size: 14px; color: var(--gray-700); flex: 1; background: transparent;
+}
+.input-field input::placeholder { color: var(--gray-400); }
+.input-field svg { color: var(--gray-400); flex-shrink: 0; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 0 20px; height: 44px;
+  background: var(--blue); color: white;
+  border: none; border-radius: 8px;
+  font-family: inherit; font-size: 14px; font-weight: 600;
+  cursor: pointer; white-space: nowrap;
+}
+.btn-primary:hover { opacity: .9; }
+
+/* ── TABLE ───────────────────────────────────── */
+.table-wrap { border: 1px solid var(--gray-200); border-radius: 12px; overflow: hidden; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+thead th {
+  background: white; padding: 14px 18px;
+  text-align: left; font-weight: 600; color: var(--gray-700);
+  border-bottom: 1px solid var(--gray-200); white-space: nowrap;
+}
+tbody td {
+  padding: 14px 18px; color: var(--gray-700);
+  border-bottom: 1px solid var(--gray-200); white-space: nowrap;
+}
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:nth-child(odd) td { background: var(--gray-50); }
+tbody tr:nth-child(even) td { background: white; }
+
+/* ── ACTION DROPDOWN ─────────────────────────── */
+.action-wrap { position: relative; display: inline-block; }
+.action-btn {
+  width: 32px; height: 32px; border: 1px solid var(--gray-200);
+  border-radius: 6px; background: white; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+.action-btn svg { stroke: #64748B; }
+.dropdown-menu {
+  position: absolute; right: 0; top: 36px;
+  background: white; border: 1px solid var(--gray-200);
+  border-radius: 12px; padding: 4px 0; width: 220px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.12); z-index: 100;
+  display: none;
+}
+.dropdown-menu.open { display: block; }
+.dropdown-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 16px; height: 44px; font-size: 14px;
+  color: var(--gray-700); cursor: pointer;
+}
+.dropdown-item svg { stroke: #EF4F3E; flex-shrink: 0; }
+.dropdown-item:hover { background: var(--gray-50); }
+.dropdown-item--danger { color: var(--red-light); }
+.dropdown-item--danger svg { stroke: var(--red-light); }
+
+/* ── TABLE FOOTER ────────────────────────────── */
+.table-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 16px; background: white;
+}
+.table-footer-left {
+  display: flex; align-items: center; gap: 16px;
+  font-size: 14px; color: var(--gray-500);
+}
+.table-footer-select {
+  border: 1px solid var(--gray-200); border-radius: 4px;
+  padding: 5px 8px; font-size: 14px; background: white; font-family: inherit;
+}
+.table-footer-arrows { display: flex; gap: 4px; }
+.table-footer-btn {
+  width: 44px; height: 44px; border: none; background: transparent;
+  border-radius: 4px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; color: var(--gray-500);
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="navbar-logo">
+    <svg width="140" height="30" viewBox="0 0 350 75" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M51.3142 2.72317C51.4862 2.79084 51.6581 2.85851 51.8353 2.92823C55.0807 4.22669 57.9428 6.00857 60.7199 8.13143C60.88 8.24934 61.04 8.36725 61.2049 8.48874C62.6091 9.5873 63.4269 10.7547 63.6546 12.5486C63.7877 15.0007 63.259 16.8202 61.6311 18.6834C60.3378 19.8701 58.6776 20.3918 56.9429 20.4764C54.6604 20.3578 53.1287 19.2261 51.3767 17.8604C46.2655 14.0192 39.6353 12.8133 33.3855 13.6922C26.9637 14.769 21.3603 18.4113 17.5713 23.6802C14.7832 27.7364 13.4122 31.9586 13.4127 36.8664C13.4122 37.3587 13.408 37.8508 13.4035 38.343C13.3963 40.011 13.454 41.5617 13.9266 43.1675C14.0021 43.461 14.0776 43.7544 14.1553 44.0567C15.164 47.4984 16.6991 50.589 19.0997 53.2786C19.2583 53.4705 19.4168 53.6624 19.5801 53.8601C23.2321 58.164 28.8991 61.0608 34.526 61.588C35.4157 61.6283 36.3004 61.6427 37.191 61.6409C37.3489 61.6408 37.5067 61.6406 37.6694 61.6405C43.3124 61.6125 48.6941 59.6439 53.098 56.0783C54.7918 54.7408 56.7597 54.6814 58.8388 54.9246C60.5821 55.4356 61.8444 56.4741 62.8362 57.9815C63.6996 59.593 64.0662 61.0476 63.6215 62.8395C62.3434 66.8619 58.2959 68.9885 54.7679 70.8702C49.1502 73.7781 43.2189 75.015 36.9265 74.9999C36.7346 74.9998 36.5428 74.9998 36.3452 74.9997C33.4726 74.9923 30.7955 74.8226 28.0351 73.9711C27.7042 73.8765 27.3733 73.7822 27.0422 73.6882C26.1095 73.4158 25.1917 73.1114 24.2729 72.7954C24.0098 72.7063 23.7467 72.6172 23.4756 72.5254C15.798 69.7622 9.06917 63.5641 4.9912 56.5706C4.84207 56.319 4.69294 56.0675 4.53929 55.8083C1.43473 50.3955 0.00896877 44.3599 0.00964198 38.1576C0.00913208 37.634 0.004864 37.1104 0.000399324 36.5868C-0.0114826 33.6277 0.239905 30.7241 1.00848 27.8539C1.05749 27.6704 1.1065 27.4868 1.15699 27.2976C3.82877 17.8382 10.4446 9.57859 18.9969 4.78066C19.4212 4.56157 19.8476 4.34618 20.2754 4.13402C20.5264 4.00459 20.7774 3.87516 21.036 3.74181C30.5504 -0.963432 41.5159 -1.14923 51.3142 2.72317Z" fill="white"/>
+<path d="M70.1254 20.1236C70.8309 20.3587 70.8309 20.3587 71.2699 21.1835C71.4306 21.544 71.5877 21.906 71.742 22.2692C71.8249 22.462 71.9077 22.6547 71.993 22.8533C75.1453 30.2976 75.9425 38.8256 73.8877 46.6946C73.8373 46.8889 73.7869 47.0832 73.735 47.2833C73.0051 49.9991 71.9364 52.4575 70.5957 54.9245C69.9252 54.2903 69.4174 53.6573 68.9203 52.8817C66.7182 49.7092 63.3669 47.6924 59.573 46.9976C56.4976 46.5795 53.4494 46.8 50.6674 48.223C50.5057 48.3042 50.3441 48.3854 50.1775 48.469C49.0802 49.0417 48.126 49.704 47.1697 50.4862C43.9167 53.1349 39.7703 54.0829 35.6424 53.8076C31.3225 53.3485 27.7086 51.1881 24.8826 47.9217C21.8648 44.0992 20.8063 39.965 21.2159 35.1726C21.8122 30.7817 24.3762 27.1343 27.7668 24.4167C30.588 22.3885 33.7304 21.3577 37.1908 21.4168C37.4598 21.4198 37.7287 21.4229 38.0058 21.426C39.9405 21.4725 41.5463 21.6575 43.3192 22.475C43.7216 22.6505 43.7216 22.6505 44.1321 22.8295C45.8427 23.6264 47.2892 24.592 48.7743 25.7486C49.7241 26.4533 50.6909 26.9683 51.7843 27.4129C52.0512 27.5252 52.0512 27.5252 52.3235 27.6398C55.8834 28.868 60.1474 28.3525 63.5277 26.8756C66.4343 25.4243 68.7826 23.0674 70.1254 20.1236Z" fill="#EF4F3E"/>
+<path d="M324.418 2.93267H331.658V23.4761H332L335.375 19.5142L340.658 13.8892H348.973L339.19 23.8674L350 39.1283H341.391L334.054 27.9761L331.658 30.3729V39.1283H324.418V2.93267Z" fill="white"/>
+<path d="M308.101 39.7153C306.111 39.7153 304.318 39.4218 302.72 38.8348C301.155 38.2153 299.818 37.3348 298.709 36.1935C297.633 35.0522 296.802 33.6663 296.215 32.0359C295.628 30.4055 295.334 28.5631 295.334 26.5087C295.334 24.4544 295.628 22.612 296.215 20.9816C296.802 19.3511 297.633 17.9653 298.709 16.824C299.818 15.6827 301.155 14.8185 302.72 14.2316C304.318 13.612 306.095 13.3022 308.052 13.3022C310.823 13.3022 313.041 13.8729 314.704 15.0142C316.399 16.1229 317.688 17.6066 318.568 19.4653L312.992 22.4979C312.535 21.5196 311.932 20.7044 311.182 20.0522C310.465 19.4001 309.421 19.074 308.052 19.074C306.389 19.074 305.101 19.5631 304.188 20.5414C303.307 21.487 302.867 22.7914 302.867 24.4544V28.5631C302.867 30.2261 303.307 31.5468 304.188 32.525C305.101 33.4707 306.421 33.9435 308.149 33.9435C309.552 33.9435 310.644 33.6174 311.427 32.9653C312.242 32.3131 312.927 31.4653 313.481 30.4218L318.959 33.5522C318.046 35.4109 316.709 36.9109 314.948 38.0522C313.22 39.1609 310.938 39.7153 308.101 39.7153Z" fill="white"/>
+<path d="M287.38 39.1283C285.88 39.1283 284.674 38.7533 283.761 38.0033C282.848 37.2207 282.31 36.112 282.147 34.6772H281.902C281.446 36.3403 280.533 37.5957 279.163 38.4435C277.826 39.2913 276.179 39.7153 274.223 39.7153C271.777 39.7153 269.804 39.0631 268.304 37.7587C266.837 36.4218 266.103 34.5631 266.103 32.1827C266.103 29.5413 267.065 27.5848 268.989 26.3131C270.913 25.0414 273.734 24.4055 277.451 24.4055H281.511V23.1337C281.511 21.6337 281.152 20.5087 280.435 19.7587C279.75 18.9761 278.576 18.5848 276.913 18.5848C275.381 18.5848 274.141 18.8783 273.196 19.4653C272.25 20.0522 271.435 20.8185 270.75 21.7642L266.788 18.2424C267.636 16.8077 268.957 15.6338 270.75 14.7207C272.576 13.7751 274.908 13.3022 277.745 13.3022C281.201 13.3022 283.891 14.1011 285.815 15.699C287.772 17.2642 288.75 19.6446 288.75 22.8403V33.8946H291.538V39.1283H287.38ZM276.962 34.9707C278.234 34.9707 279.31 34.6609 280.19 34.0413C281.071 33.4218 281.511 32.525 281.511 31.3511V28.3185H277.647C274.679 28.3185 273.196 29.3131 273.196 31.3022V32.2805C273.196 33.1609 273.538 33.8294 274.223 34.2859C274.908 34.7424 275.821 34.9707 276.962 34.9707Z" fill="white"/>
+<path d="M238.34 33.5033H244.161V19.5142H238.34V13.8892H251.4V21.0305H251.742C251.97 20.1174 252.28 19.237 252.672 18.3892C253.095 17.5088 253.617 16.7424 254.237 16.0903C254.889 15.4055 255.671 14.8674 256.585 14.4761C257.498 14.0848 258.574 13.8892 259.813 13.8892H262.21V20.5414H256.829C255.036 20.5414 253.682 21.0794 252.769 22.1555C251.856 23.199 251.4 24.487 251.4 26.0196V33.5033H259.715V39.1283H238.34V33.5033Z" fill="white"/>
+<path d="M222.511 39.1283C219.902 39.1283 217.962 38.4435 216.69 37.074C215.419 35.7044 214.783 33.9598 214.783 31.8403V19.5142H207.935V13.8892H212.386C213.462 13.8892 214.229 13.6772 214.685 13.2533C215.142 12.8294 215.37 12.0468 215.37 10.9055V4.98702H222.022V13.8892H231.854V19.5142H222.022V33.5033H231.854V39.1283H222.511Z" fill="white"/>
+<path d="M193.28 10.6609C191.65 10.6609 190.509 10.3348 189.856 9.68267C189.237 8.99788 188.927 8.18267 188.927 7.23702V5.81854C188.927 4.84028 189.237 4.02506 189.856 3.37289C190.509 2.72072 191.65 2.39463 193.28 2.39463C194.911 2.39463 196.036 2.72072 196.655 3.37289C197.308 4.02506 197.634 4.84028 197.634 5.81854V7.23702C197.634 8.18267 197.308 8.99788 196.655 9.68267C196.036 10.3348 194.911 10.6609 193.28 10.6609ZM181.639 33.5033H189.661V19.5142H181.639V13.8892H196.9V33.5033H204.335V39.1283H181.639V33.5033Z" fill="white"/>
+<path d="M176.718 41.6718C176.718 44.3457 175.593 46.3185 173.343 47.5903C171.093 48.862 167.555 49.4979 162.729 49.4979C160.316 49.4979 158.327 49.3511 156.762 49.0576C155.196 48.7968 153.941 48.4055 152.995 47.8837C152.082 47.362 151.43 46.7424 151.039 46.025C150.68 45.3076 150.501 44.525 150.501 43.6772C150.501 42.2424 150.925 41.15 151.772 40.4C152.62 39.6826 153.811 39.1283 155.343 38.737V38.4435C154.267 38.1174 153.403 37.6609 152.751 37.074C152.131 36.4544 151.821 35.5903 151.821 34.4816C151.821 33.2424 152.229 32.3294 153.044 31.7424C153.892 31.1555 155.001 30.699 156.37 30.3729V30.0794C154.87 29.362 153.696 28.3511 152.849 27.0468C152.033 25.7424 151.626 24.1609 151.626 22.3022C151.626 20.8348 151.887 19.5468 152.408 18.4381C152.93 17.2968 153.664 16.3511 154.609 15.6011C155.588 14.8511 156.745 14.2805 158.082 13.8892C159.419 13.4979 160.919 13.3022 162.582 13.3022C164.18 13.3022 165.664 13.4816 167.033 13.8403V12.4707C167.033 11.4925 167.376 10.6772 168.06 10.0251C168.745 9.37289 169.691 9.0468 170.897 9.0468H175.349V14.3294H169.283V14.7696C170.653 15.487 171.713 16.4816 172.463 17.7533C173.245 18.9924 173.637 20.5087 173.637 22.3022C173.637 23.7696 173.376 25.0577 172.854 26.1664C172.332 27.275 171.582 28.2207 170.604 29.0033C169.626 29.7533 168.452 30.324 167.082 30.7153C165.745 31.1066 164.245 31.3022 162.582 31.3022C161.832 31.3022 161.115 31.2696 160.43 31.2044C159.745 31.1066 159.093 30.9761 158.474 30.8131C158.115 31.0087 157.805 31.2533 157.544 31.5468C157.316 31.8403 157.202 32.2153 157.202 32.6718C157.202 33.0631 157.3 33.3729 157.495 33.6011C157.691 33.8294 157.952 34.0087 158.278 34.1392C158.637 34.237 159.044 34.3022 159.501 34.3348C159.957 34.3674 160.43 34.3837 160.919 34.3837H166.691C168.484 34.3837 170.017 34.5631 171.289 34.9218C172.56 35.2805 173.604 35.7859 174.419 36.4381C175.234 37.0903 175.821 37.8566 176.18 38.737C176.539 39.6174 176.718 40.5957 176.718 41.6718ZM169.87 42.2098C169.87 41.5576 169.609 41.0359 169.088 40.6446C168.566 40.2859 167.571 40.1066 166.104 40.1066H157.446C156.794 40.6609 156.468 41.3457 156.468 42.1609C156.468 42.9435 156.794 43.5794 157.446 44.0685C158.131 44.5903 159.272 44.8511 160.87 44.8511H165.126C166.789 44.8511 167.995 44.6229 168.745 44.1663C169.495 43.7098 169.87 43.0576 169.87 42.2098ZM162.582 26.7044C164.05 26.7044 165.109 26.3457 165.762 25.6283C166.446 24.9109 166.789 23.9979 166.789 22.8892V21.7153C166.789 20.6066 166.446 19.6935 165.762 18.9761C165.109 18.2588 164.05 17.9001 162.582 17.9001C161.147 17.9001 160.104 18.2588 159.452 18.9761C158.8 19.6935 158.474 20.6066 158.474 21.7153V22.8892C158.474 23.9979 158.8 24.9109 159.452 25.6283C160.104 26.3457 161.147 26.7044 162.582 26.7044Z" fill="white"/>
+<path d="M134.036 39.7153C132.08 39.7153 130.319 39.4218 128.753 38.8348C127.188 38.2153 125.851 37.3348 124.743 36.1935C123.666 35.0522 122.835 33.6663 122.248 32.0359C121.661 30.4055 121.368 28.5631 121.368 26.5087C121.368 24.4544 121.661 22.612 122.248 20.9816C122.835 19.3511 123.666 17.9653 124.743 16.824C125.851 15.6827 127.188 14.8185 128.753 14.2316C130.319 13.612 132.08 13.3022 134.036 13.3022C135.993 13.3022 137.753 13.612 139.319 14.2316C140.884 14.8185 142.205 15.6827 143.281 16.824C144.389 17.9653 145.237 19.3511 145.824 20.9816C146.411 22.612 146.705 24.4544 146.705 26.5087C146.705 28.5631 146.411 30.4055 145.824 32.0359C145.237 33.6663 144.389 35.0522 143.281 36.1935C142.205 37.3348 140.884 38.2153 139.319 38.8348C137.753 39.4218 135.993 39.7153 134.036 39.7153ZM134.036 34.3348C135.666 34.3348 136.938 33.8294 137.851 32.8185C138.764 31.8077 139.221 30.3729 139.221 28.5142V24.5033C139.221 22.6446 138.764 21.2098 137.851 20.199C136.938 19.1881 135.666 18.6827 134.036 18.6827C132.406 18.6827 131.134 19.1881 130.221 20.199C129.308 21.2098 128.851 22.6446 128.851 24.5033V28.5142C128.851 30.3729 129.308 31.8077 130.221 32.8185C131.134 33.8294 132.406 34.3348 134.036 34.3348Z" fill="white"/>
+<path d="M95.0226 39.1283V4.98702H102.408V33.112H117.082V39.1283H95.0226Z" fill="white"/>
+    </svg>
+  </div>
+  <div class="navbar-actions">
+    <button class="nav-icon-btn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </button>
+    <button class="nav-icon-btn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    </button>
+    <button class="nav-icon-btn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+    </button>
+    <div class="nav-avatar">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F4085" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </div>
+  </div>
+</nav>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <a href="logitrack-dashboard.html" class="sidebar-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </a>
+      <a href="logitrack-actividades.html" class="sidebar-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Personas
+      </a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+      <a href="logitrack-detalle-proyecto.html" class="back-btn" title="Volver al proyecto">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#EF4F3E" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      </a>
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#EF4F3E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      <h1 class="page-title">Actividades del proyecto</h1>
+    </div>
+
+    <!-- PERSON HEADER – COLLAPSED (Variante 1) -->
+    <div class="person-header" id="personHeader">
+      <div class="person-header__left">
+        <div class="person-avatar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="person-summary">
+          <div class="person-name">Silvio Traverso</div>
+          <div class="person-meta">Cargo · RUT: 0.000.000-0</div>
+        </div>
+        <span class="badge badge--positive">Aprobada</span>
+      </div>
+      <button class="btn-toggle" id="toggleBtn" onclick="togglePersonData()">
+        Ver datos generales
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1F4085" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+    </div>
+
+    <!-- PERSON DETAILS – EXPANDED (Variante 2) -->
+    <div class="person-details" id="personDetails">
+      <div class="person-details-grid">
+        <div class="detail-item">
+          <span class="detail-label">Nombre completo</span>
+          <span class="detail-value">Silvio Traverso</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">RUT</span>
+          <span class="detail-value">0.000.000-0</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Rol / Cargo</span>
+          <span class="detail-value">Cargo</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Estado</span>
+          <span class="detail-value"><span class="badge badge--positive">Aprobada</span></span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Fecha ingreso</span>
+          <span class="detail-value">17/07/2025</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Fecha egreso</span>
+          <span class="detail-value">17/07/2026</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Experiencia</span>
+          <span class="detail-value">3 años</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Proyecto</span>
+          <span class="detail-value">Radomiro Tomic</span>
+        </div>
+      </div>
+      <div class="person-details__divider"></div>
+      <div class="person-details__row">
+        <div class="detail-contact">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.44 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.78a16 16 0 0 0 6.29 6.29l.93-.93a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          +569 99312452
+        </div>
+        <div class="detail-contact">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          silvio.traverso@empresa.cl
+        </div>
+        <div class="detail-contact">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Santiago, Chile
+        </div>
+      </div>
+    </div>
+
+    <!-- TOOLBAR -->
+    <div class="toolbar">
+      <div class="toolbar-filters">
+        <div class="input-group">
+          <label class="input-label">Buscar por actividad</label>
+          <div class="input-field">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" placeholder="Buscar...">
+          </div>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Tipo</label>
+          <div class="input-field">
+            <input type="text" placeholder="Todos" style="flex:1">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="input-group">
+          <label class="input-label">Estado</label>
+          <div class="input-field">
+            <input type="text" placeholder="Todos" style="flex:1">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="toolbar-row">
+        <span class="results-count">Actividades registradas: 12</span>
+        <button class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Agregar actividad
+        </button>
+      </div>
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Actividad</th>
+            <th>Tipo</th>
+            <th>Fecha inicio</th>
+            <th>Fecha término</th>
+            <th>Duración</th>
+            <th>Estado</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Instalación de andamios</td>
+            <td>Montaje</td>
+            <td>01/07/2025</td>
+            <td>05/07/2025</td>
+            <td>4 días</td>
+            <td><span class="badge badge--positive">Completada</span></td>
+            <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Ver detalle</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Editar actividad</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Marcar como completada</div><div class="dropdown-item dropdown-item--danger"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>Eliminar actividad</div></div></div></td>
+          </tr>
+          <tr>
+            <td>Colada hormigón fundaciones</td>
+            <td>Estructura</td>
+            <td>07/07/2025</td>
+            <td>10/07/2025</td>
+            <td>3 días</td>
+            <td><span class="badge badge--positive">Completada</span></td>
+            <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Ver detalle</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Editar actividad</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Marcar como completada</div><div class="dropdown-item dropdown-item--danger"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>Eliminar actividad</div></div></div></td>
+          </tr>
+          <tr>
+            <td>Montaje estructura metálica</td>
+            <td>Estructura</td>
+            <td>12/07/2025</td>
+            <td>22/07/2025</td>
+            <td>10 días</td>
+            <td><span class="badge badge--process">En progreso</span></td>
+            <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Ver detalle</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Editar actividad</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Marcar como completada</div><div class="dropdown-item dropdown-item--danger"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>Eliminar actividad</div></div></div></td>
+          </tr>
+          <tr>
+            <td>Instalación eléctrica piso 1</td>
+            <td>Instalaciones</td>
+            <td>15/07/2025</td>
+            <td>25/07/2025</td>
+            <td>10 días</td>
+            <td><span class="badge badge--process">En progreso</span></td>
+            <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Ver detalle</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Editar actividad</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Marcar como completada</div><div class="dropdown-item dropdown-item--danger"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>Eliminar actividad</div></div></div></td>
+          </tr>
+          <tr>
+            <td>Impermeabilización cubierta</td>
+            <td>Terminaciones</td>
+            <td>20/07/2025</td>
+            <td>23/07/2025</td>
+            <td>3 días</td>
+            <td><span class="badge badge--neutral">Pendiente</span></td>
+            <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Ver detalle</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Editar actividad</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Marcar como completada</div><div class="dropdown-item dropdown-item--danger"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>Eliminar actividad</div></div></div></td>
+          </tr>
+          <tr>
+            <td>Pintura interior oficinas</td>
+            <td>Terminaciones</td>
+            <td>25/07/2025</td>
+            <td>01/08/2025</td>
+            <td>7 días</td>
+            <td><span class="badge badge--neutral">Pendiente</span></td>
+            <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Ver detalle</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Editar actividad</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Marcar como completada</div><div class="dropdown-item dropdown-item--danger"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>Eliminar actividad</div></div></div></td>
+          </tr>
+          <tr>
+            <td>Prueba instalaciones sanitarias</td>
+            <td>Instalaciones</td>
+            <td>28/07/2025</td>
+            <td>29/07/2025</td>
+            <td>1 día</td>
+            <td><span class="badge badge--negative">Bloqueada</span></td>
+            <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Ver detalle</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Editar actividad</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Marcar como completada</div><div class="dropdown-item dropdown-item--danger"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>Eliminar actividad</div></div></div></td>
+          </tr>
+          <tr>
+            <td>Revisión de planos estructurales</td>
+            <td>Revisión</td>
+            <td>30/07/2025</td>
+            <td>31/07/2025</td>
+            <td>1 día</td>
+            <td><span class="badge badge--neutral">Pendiente</span></td>
+            <td><div class="action-wrap"><button class="action-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button><div class="dropdown-menu"><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Ver detalle</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Editar actividad</div><div class="dropdown-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>Marcar como completada</div><div class="dropdown-item dropdown-item--danger"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>Eliminar actividad</div></div></div></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="table-footer">
+        <div class="table-footer-left">
+          <span>Rows per page:</span>
+          <select class="table-footer-select"><option>10</option><option>20</option><option>50</option></select>
+          <span>1 - 8 of 12</span>
+        </div>
+        <div class="table-footer-arrows">
+          <button class="table-footer-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg></button>
+          <button class="table-footer-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div><!-- /layout -->
+
+<script>
+  // Toggle persona: variante 1 (colapsado) ↔ variante 2 (expandido)
+  function togglePersonData() {
+    var header  = document.getElementById('personHeader');
+    var details = document.getElementById('personDetails');
+    var btn     = document.getElementById('toggleBtn');
+    var isOpen  = details.classList.contains('open');
+    if (isOpen) {
+      details.classList.remove('open');
+      header.classList.remove('expanded');
+      btn.classList.remove('open');
+      btn.childNodes[0].textContent = 'Ver datos generales';
+    } else {
+      details.classList.add('open');
+      header.classList.add('expanded');
+      btn.classList.add('open');
+      btn.childNodes[0].textContent = 'Ocultar datos generales';
+    }
+  }
+
+  // Dropdown acción: abrir/cerrar al hacer click
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('.action-btn');
+    var allMenus = document.querySelectorAll('.dropdown-menu');
+    if (btn) {
+      var menu = btn.parentElement.querySelector('.dropdown-menu');
+      var isOpen = menu.classList.contains('open');
+      allMenus.forEach(function(m) { m.classList.remove('open'); });
+      if (!isOpen) menu.classList.add('open');
+      e.stopPropagation();
+    } else if (!e.target.closest('.dropdown-menu')) {
+      allMenus.forEach(function(m) { m.classList.remove('open'); });
+    }
+  });
+</script>
+
+</body>
+</html>
